@@ -1,3 +1,1 @@
-integer x
-float y
-alfonso = Get next input
+--4*(85)-(48*92)++++372.1%-x

@@ -40,6 +40,48 @@ public interface GramaticaCoralVisitor<T> extends ParseTreeVisitor<T> {
 	 */
 	T visitInput(GramaticaCoralParser.InputContext ctx);
 	/**
+	 * Visit a parse tree produced by {@link GramaticaCoralParser#arithexpr}.
+	 * @param ctx the parse tree
+	 * @return the visitor result
+	 */
+	T visitArithexpr(GramaticaCoralParser.ArithexprContext ctx);
+	/**
+	 * Visit a parse tree produced by {@link GramaticaCoralParser#sumop}.
+	 * @param ctx the parse tree
+	 * @return the visitor result
+	 */
+	T visitSumop(GramaticaCoralParser.SumopContext ctx);
+	/**
+	 * Visit a parse tree produced by {@link GramaticaCoralParser#mulop}.
+	 * @param ctx the parse tree
+	 * @return the visitor result
+	 */
+	T visitMulop(GramaticaCoralParser.MulopContext ctx);
+	/**
+	 * Visit a parse tree produced by {@link GramaticaCoralParser#pizq}.
+	 * @param ctx the parse tree
+	 * @return the visitor result
+	 */
+	T visitPizq(GramaticaCoralParser.PizqContext ctx);
+	/**
+	 * Visit a parse tree produced by {@link GramaticaCoralParser#pder}.
+	 * @param ctx the parse tree
+	 * @return the visitor result
+	 */
+	T visitPder(GramaticaCoralParser.PderContext ctx);
+	/**
+	 * Visit a parse tree produced by {@link GramaticaCoralParser#sign}.
+	 * @param ctx the parse tree
+	 * @return the visitor result
+	 */
+	T visitSign(GramaticaCoralParser.SignContext ctx);
+	/**
+	 * Visit a parse tree produced by {@link GramaticaCoralParser#number}.
+	 * @param ctx the parse tree
+	 * @return the visitor result
+	 */
+	T visitNumber(GramaticaCoralParser.NumberContext ctx);
+	/**
 	 * Visit a parse tree produced by {@link GramaticaCoralParser#variable}.
 	 * @param ctx the parse tree
 	 * @return the visitor result
