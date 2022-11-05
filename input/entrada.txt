@@ -9,6 +9,9 @@ integer i
 
 SeedRandomNumbers(3+4+++++7)
 
+mifuncion2()
+mifuncion(x,23423+32,3%y)
+
 userNums.size = 5
 
 x = RandomNumber(0,1) + AbsoluteValue(-3) + SquareRoot(RandomNumber(2,4)) + RaiseToPower(3,2)

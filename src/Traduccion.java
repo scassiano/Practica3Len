@@ -161,8 +161,13 @@ public class Traduccion extends GramaticaCoralBaseListener {
 
     @Override
     public void exitCallfunction(GramaticaCoralParser.CallfunctionContext ctx){
-        //Cerrar el llamado de la funcion
-        System.out.print(")");
+        //Verificar si se llama desde un command
+        if(ctx.getParent() instanceof GramaticaCoralParser.CommandContext){
+            System.out.println(")");
+        } else {
+            //Cerrar el llamado de la funcion
+            System.out.print(")");
+        }
     }
 
 
