@@ -167,6 +167,16 @@ public interface GramaticaCoralListener extends ParseTreeListener {
 	 */
 	void exitSize(GramaticaCoralParser.SizeContext ctx);
 	/**
+	 * Enter a parse tree produced by {@link GramaticaCoralParser#with}.
+	 * @param ctx the parse tree
+	 */
+	void enterWith(GramaticaCoralParser.WithContext ctx);
+	/**
+	 * Exit a parse tree produced by {@link GramaticaCoralParser#with}.
+	 * @param ctx the parse tree
+	 */
+	void exitWith(GramaticaCoralParser.WithContext ctx);
+	/**
 	 * Enter a parse tree produced by {@link GramaticaCoralParser#coma}.
 	 * @param ctx the parse tree
 	 */

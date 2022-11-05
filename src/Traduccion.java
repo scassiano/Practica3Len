@@ -95,12 +95,29 @@ public class Traduccion extends GramaticaCoralBaseListener {
     public void enterOutput(GramaticaCoralParser.OutputContext ctx) {
         /**Imprimir un print( */
         System.out.print("print(");
+
+        //Si es imprimir con cifras decimales especificas
+        if(ctx.with() != null){
+            System.out.print("round(");
+        }
     }
 
     @Override
     public void exitOutput(GramaticaCoralParser.OutputContext ctx) {
         /** Cerrar el parentesis del print */
-        System.out.println(", end='')");
+        //Si es imprimir con cifras decimales especificas
+        //Poner un parentesis extra
+        if(ctx.with() != null){
+            System.out.println("), end='')");
+        } else {
+            System.out.println(", end='')");
+        }
+    }
+
+    @Override
+    public void enterWith(GramaticaCoralParser.WithContext ctx){
+        //Imprimir una coma para el metodo round en la traduccion a python
+        System.out.print(",");
     }
 
     @Override

@@ -106,6 +106,12 @@ public interface GramaticaCoralVisitor<T> extends ParseTreeVisitor<T> {
 	 */
 	T visitSize(GramaticaCoralParser.SizeContext ctx);
 	/**
+	 * Visit a parse tree produced by {@link GramaticaCoralParser#with}.
+	 * @param ctx the parse tree
+	 * @return the visitor result
+	 */
+	T visitWith(GramaticaCoralParser.WithContext ctx);
+	/**
 	 * Visit a parse tree produced by {@link GramaticaCoralParser#coma}.
 	 * @param ctx the parse tree
 	 * @return the visitor result

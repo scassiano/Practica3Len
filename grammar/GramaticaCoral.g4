@@ -14,7 +14,7 @@ input : variable assign GET NEXT INPUT;
 
 set: variable assign arithexpr;
 
-output : PUT outvalue TO OUTPUT;
+output : PUT outvalue TO OUTPUT (with arithexpr DECIMAL PLACES | );
 
 comment : COMMENT;
 
@@ -49,6 +49,7 @@ outvalue: arithexpr | STRING;
 
 size: QUESTIONMARK | INTNUM;
 
+with: WITH;
 coma: COMA;
 assign : ASSIGN;
 sumop : SUMOP;
@@ -65,6 +66,9 @@ number : INTNUM
 ;
 
 // parser rules start with lowercase letters, lexer rules with uppercase
+WITH : 'with';
+DECIMAL : 'decimal';
+PLACES : 'places';
 SEEDRANDOMNUMBERS : 'SeedRandomNumbers';
 SQUAREROOT : 'SquareRoot';
 RAISETOPOWER : 'RaiseToPower';
