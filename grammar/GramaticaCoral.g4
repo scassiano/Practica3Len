@@ -4,7 +4,7 @@ init: commands EOF;
 
 commands: command commands | ;
 
-command : declaration | input | set | output;
+command : declaration | input | set | output | comment;
 
 declaration : TYPE IDENTIFIER
 | TYPE ARRAY PIZQ size PDER IDENTIFIER;
@@ -14,6 +14,8 @@ input : variable assign GET NEXT INPUT;
 set: variable assign arithexpr;
 
 output : PUT outvalue TO OUTPUT;
+
+comment : COMMENT;
 
 //PENDIENTE AGREGAR FUNCIONES COMO TERMINOS DE OPERACIONES
 arithexpr : arithexpr sumop arithexpr
@@ -26,7 +28,7 @@ arithexpr : arithexpr sumop arithexpr
 
 
 //PENDIENTE PERMITIR ARREGLOS EN VARIABLES
-variable: IDENTIFIER | IDENTIFIER cizq arithexpr cder;
+variable: IDENTIFIER | IDENTIFIER cizq arithexpr cder | IDENTIFIER DOT RSIZE;
 
 outvalue: arithexpr | STRING;
 
@@ -58,6 +60,8 @@ CDER : ']';
 PIZQ   : '(' ;
 PDER   : ')' ;
 ASSIGN : '=';
+DOT : '.';
+RSIZE : 'size';
 PUT : 'Put';
 TO : 'to';
 OUTPUT : 'output';
@@ -67,4 +71,5 @@ INPUT: 'input';
 TYPE : ('integer' | 'float');
 IDENTIFIER : [a-zA-Z][a-zA-Z0-9_]* ;
 QUESTIONMARK : '?';
+COMMENT : '//'.*?[\n];
 WS: [ \t\r\n]+ -> skip; // Define whitespace rule

@@ -7,6 +7,9 @@ public class Traduccion extends GramaticaCoralBaseListener {
     //Nombre variable que se esta asignando actualmente
     String currentVariable = new String();
 
+    //Saber si se esta haciendo una asignacion del size de un arreglo
+    Boolean sizeAssign = new Boolean(false);
+
     @Override
     public void enterInit(GramaticaCoralParser.InitContext ctx) {
         /** Agregar los imports para las funciones predeterminadas*/
@@ -70,7 +73,12 @@ public class Traduccion extends GramaticaCoralBaseListener {
         //Almacenar la variable que se esta asignando actualmente
         currentVariable = ctx.variable().IDENTIFIER().getText();
 
-        /** Imprimir identificador de la variable y un signo igual*/
+        //Verificar si es una asignación de un size
+        if(ctx.variable().RSIZE() != null){
+            sizeAssign = true;
+        }
+
+        /** Imprimir identificador de la variable*/
         System.out.print(ctx.variable().IDENTIFIER().getText());
 
     }
@@ -112,6 +120,13 @@ public class Traduccion extends GramaticaCoralBaseListener {
     }
 
     @Override
+    public void enterComment(GramaticaCoralParser.CommentContext ctx) {
+        //Comentario sin las barras laterales
+        String comentario = ctx.COMMENT().getText().substring(2);
+        //Comentario ya tiene salto de linea, por eso sin ln
+        System.out.print("#"+comentario);
+    }
+    @Override
     public void enterSign(GramaticaCoralParser.SignContext ctx) {
         System.out.print(ctx.SUMOP().getText());
     }
@@ -151,14 +166,28 @@ public class Traduccion extends GramaticaCoralBaseListener {
         // Imprimir un signo igual
         System.out.print(ctx.ASSIGN().getText());
 
-        //Realizar el cast del resultado al tipo de la variable donde se asigna
+        //Obtener el tipo de la variable a asignar
         String variableType = table.get(currentVariable);
-        if (variableType.compareTo("integer") == 0) {
-            System.out.print("int");
-        } else if (variableType.compareTo("float") == 0) {
-            System.out.print("float");
+
+        //Verificar si se esta realizando una asignacion a un size
+        if (sizeAssign){
+            //Realizar el cast del resultado al tipo de la variable donde se asigna
+            if (variableType.compareTo("integer") == 0) {
+                System.out.print("[0]*int(");
+            } else if (variableType.compareTo("float") == 0) {
+                System.out.print("[0.0]*int(");
+            }
+            sizeAssign = false;
+        } else {
+            //Realizar el cast del resultado al tipo de la variable donde se asigna
+            if (variableType.compareTo("integer") == 0) {
+                System.out.print("int");
+            } else if (variableType.compareTo("float") == 0) {
+                System.out.print("float");
+            }
+            System.out.print("(");
         }
-        System.out.print("(");
+
     }
 
 }

@@ -99,6 +99,18 @@ public class GramaticaCoralBaseListener implements GramaticaCoralListener {
 	 *
 	 * <p>The default implementation does nothing.</p>
 	 */
+	@Override public void enterComment(GramaticaCoralParser.CommentContext ctx) { }
+	/**
+	 * {@inheritDoc}
+	 *
+	 * <p>The default implementation does nothing.</p>
+	 */
+	@Override public void exitComment(GramaticaCoralParser.CommentContext ctx) { }
+	/**
+	 * {@inheritDoc}
+	 *
+	 * <p>The default implementation does nothing.</p>
+	 */
 	@Override public void enterArithexpr(GramaticaCoralParser.ArithexprContext ctx) { }
 	/**
 	 * {@inheritDoc}

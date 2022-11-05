@@ -1,8 +1,10 @@
+// Arreglos en CORAL
+
 integer array(?) userNums
 float array(5) userVals
+
 float x
 float y
 integer i
 
-x = Get next input
-i = Get next input
+userNums.size = 5

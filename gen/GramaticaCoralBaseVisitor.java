@@ -65,6 +65,13 @@ public class GramaticaCoralBaseVisitor<T> extends AbstractParseTreeVisitor<T> im
 	 * <p>The default implementation returns the result of calling
 	 * {@link #visitChildren} on {@code ctx}.</p>
 	 */
+	@Override public T visitComment(GramaticaCoralParser.CommentContext ctx) { return visitChildren(ctx); }
+	/**
+	 * {@inheritDoc}
+	 *
+	 * <p>The default implementation returns the result of calling
+	 * {@link #visitChildren} on {@code ctx}.</p>
+	 */
 	@Override public T visitArithexpr(GramaticaCoralParser.ArithexprContext ctx) { return visitChildren(ctx); }
 	/**
 	 * {@inheritDoc}
