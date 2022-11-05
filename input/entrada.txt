@@ -1,7 +1,5 @@
 // Arreglos en CORAL
 
-SeedRandomNumbers(3+4+++++7)
-
 integer array(?) userNums
 float array(5) userVals
 
@@ -9,4 +7,10 @@ float x
 float y
 integer i
 
+SeedRandomNumbers(3+4+++++7)
+
 userNums.size = 5
+
+x = RandomNumber(0,1) + AbsoluteValue(-3) + SquareRoot(RandomNumber(2,4)) + RaiseToPower(3,2)
+
+Put x to output

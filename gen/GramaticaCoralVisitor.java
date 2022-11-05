@@ -64,6 +64,12 @@ public interface GramaticaCoralVisitor<T> extends ParseTreeVisitor<T> {
 	 */
 	T visitArithexpr(GramaticaCoralParser.ArithexprContext ctx);
 	/**
+	 * Visit a parse tree produced by {@link GramaticaCoralParser#callfunction}.
+	 * @param ctx the parse tree
+	 * @return the visitor result
+	 */
+	T visitCallfunction(GramaticaCoralParser.CallfunctionContext ctx);
+	/**
 	 * Visit a parse tree produced by {@link GramaticaCoralParser#variable}.
 	 * @param ctx the parse tree
 	 * @return the visitor result
@@ -87,6 +93,12 @@ public interface GramaticaCoralVisitor<T> extends ParseTreeVisitor<T> {
 	 * @return the visitor result
 	 */
 	T visitSize(GramaticaCoralParser.SizeContext ctx);
+	/**
+	 * Visit a parse tree produced by {@link GramaticaCoralParser#coma}.
+	 * @param ctx the parse tree
+	 * @return the visitor result
+	 */
+	T visitComa(GramaticaCoralParser.ComaContext ctx);
 	/**
 	 * Visit a parse tree produced by {@link GramaticaCoralParser#assign}.
 	 * @param ctx the parse tree

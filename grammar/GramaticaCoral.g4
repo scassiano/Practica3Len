@@ -24,8 +24,14 @@ arithexpr : arithexpr sumop arithexpr
 | number
 | pizq arithexpr pder
 | variable
+| callfunction
 ;
 
+//Llamar funciones en una expresion
+callfunction: SQUAREROOT PIZQ arithexpr PDER
+| RAISETOPOWER PIZQ arithexpr coma arithexpr PDER
+| ABSOLUTEVALUE PIZQ arithexpr PDER
+| RANDOMNUMBER PIZQ arithexpr coma arithexpr PDER ;
 
 //PENDIENTE PERMITIR ARREGLOS EN VARIABLES
 variable: IDENTIFIER | IDENTIFIER cizq arithexpr cder | IDENTIFIER DOT RSIZE;
@@ -36,6 +42,7 @@ outvalue: arithexpr | STRING;
 
 size: QUESTIONMARK | INTNUM;
 
+coma: COMA;
 assign : ASSIGN;
 sumop : SUMOP;
 mulop: MULOP;
@@ -52,6 +59,11 @@ number : INTNUM
 
 // parser rules start with lowercase letters, lexer rules with uppercase
 SEEDRANDOMNUMBERS : 'SeedRandomNumbers';
+SQUAREROOT : 'SquareRoot';
+RAISETOPOWER : 'RaiseToPower';
+ABSOLUTEVALUE : 'AbsoluteValue';
+RANDOMNUMBER : 'RandomNumber';
+COMA : ',';
 ARRAY : 'array';
 STRING: ["].*?["];
 FLOATNUM : [0-9]+([.][0-9]+);

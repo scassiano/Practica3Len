@@ -123,6 +123,18 @@ public class GramaticaCoralBaseListener implements GramaticaCoralListener {
 	 *
 	 * <p>The default implementation does nothing.</p>
 	 */
+	@Override public void enterCallfunction(GramaticaCoralParser.CallfunctionContext ctx) { }
+	/**
+	 * {@inheritDoc}
+	 *
+	 * <p>The default implementation does nothing.</p>
+	 */
+	@Override public void exitCallfunction(GramaticaCoralParser.CallfunctionContext ctx) { }
+	/**
+	 * {@inheritDoc}
+	 *
+	 * <p>The default implementation does nothing.</p>
+	 */
 	@Override public void enterVariable(GramaticaCoralParser.VariableContext ctx) { }
 	/**
 	 * {@inheritDoc}
@@ -166,6 +178,18 @@ public class GramaticaCoralBaseListener implements GramaticaCoralListener {
 	 * <p>The default implementation does nothing.</p>
 	 */
 	@Override public void exitSize(GramaticaCoralParser.SizeContext ctx) { }
+	/**
+	 * {@inheritDoc}
+	 *
+	 * <p>The default implementation does nothing.</p>
+	 */
+	@Override public void enterComa(GramaticaCoralParser.ComaContext ctx) { }
+	/**
+	 * {@inheritDoc}
+	 *
+	 * <p>The default implementation does nothing.</p>
+	 */
+	@Override public void exitComa(GramaticaCoralParser.ComaContext ctx) { }
 	/**
 	 * {@inheritDoc}
 	 *

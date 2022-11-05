@@ -10,6 +10,7 @@ public class Traduccion extends GramaticaCoralBaseListener {
     //Saber si se esta haciendo una asignacion del size de un arreglo
     Boolean sizeAssign = new Boolean(false);
 
+
     @Override
     public void enterInit(GramaticaCoralParser.InitContext ctx) {
         /** Agregar los imports para las funciones predeterminadas*/
@@ -138,6 +139,28 @@ public class Traduccion extends GramaticaCoralBaseListener {
         //Imprimir el parentesis para cerrar el metodo seed
         System.out.println(")");
     }
+
+    @Override
+    public void enterCallfunction(GramaticaCoralParser.CallfunctionContext ctx){
+        //Verificar si es una funcion SquareRoot
+        if (ctx.SQUAREROOT() != null){
+            System.out.print("math.sqrt(");
+        } else if (ctx.RAISETOPOWER() != null) {
+            System.out.print("pow(");
+        } else if (ctx.ABSOLUTEVALUE() != null) {
+            System.out.print("abs(");
+        } else if (ctx.RANDOMNUMBER() != null) {
+            System.out.print("random.randint(");
+        }
+    }
+
+    @Override
+    public void exitCallfunction(GramaticaCoralParser.CallfunctionContext ctx){
+        //Cerrar el llamado de la funcion
+        System.out.print(")");
+    }
+
+
     @Override
     public void enterSign(GramaticaCoralParser.SignContext ctx) {
         System.out.print(ctx.SUMOP().getText());
@@ -173,6 +196,10 @@ public class Traduccion extends GramaticaCoralBaseListener {
         System.out.print(ctx.CDER().getText());
     }
 
+    @Override
+    public void enterComa(GramaticaCoralParser.ComaContext ctx) {
+        System.out.print(",");
+    }
     @Override
     public void enterAssign(GramaticaCoralParser.AssignContext ctx){
         // Imprimir un signo igual
