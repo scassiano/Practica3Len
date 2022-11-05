@@ -4,11 +4,13 @@ init: commands EOF;
 
 commands: command commands | ;
 
-command : declaration | input | arithexpr ;
+command : declaration | input | set;
 
 declaration : TYPE IDENTIFIER;
 
 input : variable ASSIGN GET NEXT INPUT;
+
+set: variable assign arithexpr;
 
 arithexpr : arithexpr sumop arithexpr
 | arithexpr mulop arithexpr
@@ -18,6 +20,7 @@ arithexpr : arithexpr sumop arithexpr
 | variable
 ;
 
+assign : ASSIGN;
 sumop : SUMOP;
 mulop: MULOP;
 pizq: PIZQ;

@@ -57,6 +57,16 @@ public interface GramaticaCoralListener extends ParseTreeListener {
 	 */
 	void exitInput(GramaticaCoralParser.InputContext ctx);
 	/**
+	 * Enter a parse tree produced by {@link GramaticaCoralParser#set}.
+	 * @param ctx the parse tree
+	 */
+	void enterSet(GramaticaCoralParser.SetContext ctx);
+	/**
+	 * Exit a parse tree produced by {@link GramaticaCoralParser#set}.
+	 * @param ctx the parse tree
+	 */
+	void exitSet(GramaticaCoralParser.SetContext ctx);
+	/**
 	 * Enter a parse tree produced by {@link GramaticaCoralParser#arithexpr}.
 	 * @param ctx the parse tree
 	 */
@@ -66,6 +76,16 @@ public interface GramaticaCoralListener extends ParseTreeListener {
 	 * @param ctx the parse tree
 	 */
 	void exitArithexpr(GramaticaCoralParser.ArithexprContext ctx);
+	/**
+	 * Enter a parse tree produced by {@link GramaticaCoralParser#assign}.
+	 * @param ctx the parse tree
+	 */
+	void enterAssign(GramaticaCoralParser.AssignContext ctx);
+	/**
+	 * Exit a parse tree produced by {@link GramaticaCoralParser#assign}.
+	 * @param ctx the parse tree
+	 */
+	void exitAssign(GramaticaCoralParser.AssignContext ctx);
 	/**
 	 * Enter a parse tree produced by {@link GramaticaCoralParser#sumop}.
 	 * @param ctx the parse tree

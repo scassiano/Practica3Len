@@ -27,6 +27,18 @@ public class Traduccion extends GramaticaCoralBaseListener {
     }
 
     @Override
+    public void enterSet(GramaticaCoralParser.SetContext ctx){
+        /** Imprimir unicamente la variable*/
+        System.out.print(ctx.variable().getText());
+    }
+
+    @Override
+    public void exitSet(GramaticaCoralParser.SetContext ctx){
+        /** Imprimir un salto de linea*/
+        System.out.println();
+    }
+
+    @Override
     public void enterArithexpr(GramaticaCoralParser.ArithexprContext ctx){
         /** Verificar si es un number o un variable, que son los casos base */
         if(ctx.number() != null){
@@ -59,6 +71,11 @@ public class Traduccion extends GramaticaCoralBaseListener {
     @Override
     public void enterMulop(GramaticaCoralParser.MulopContext ctx){
         System.out.print(ctx.MULOP().getText());
+    }
+
+    @Override
+    public void enterAssign(GramaticaCoralParser.AssignContext ctx){
+        System.out.print(ctx.ASSIGN().getText());
     }
 
 }
