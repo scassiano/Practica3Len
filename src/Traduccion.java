@@ -13,18 +13,37 @@ public class Traduccion extends GramaticaCoralBaseListener {
 
     @Override
     public void enterDeclaration(GramaticaCoralParser.DeclarationContext ctx) {
-        /** Declarar variable entera con 0 o variable float con 0.0 */
-        //Declarar variable
+
+        //Declarar nombre de la variable
         System.out.print(ctx.IDENTIFIER().getText() + "=");
 
-        //Almacenar en la tabla como un integer
+        //Almacenar en la tabla segun tipo de dato del identificador
         table.put(ctx.IDENTIFIER().getText(), ctx.TYPE().getText());
 
-        //Decidir si hacerla igual a 0 o 0.0
-        if (ctx.TYPE().getText().compareTo("integer") == 0) {
-            System.out.println("0");
-        } else {
-            System.out.println("0.0");
+        if(ctx.ARRAY() != null){
+            /** Declarar un array float o integer */
+            System.out.print("[");
+            if(ctx.SIZE().getText().compareTo("?") != 0){
+                //Si la longitud del arreglo NO es signo de interrogacion
+                if (ctx.TYPE().getText().compareTo("integer") == 0){
+                    System.out.print("0]*");
+                    System.out.println(ctx.SIZE().getText());
+                } else {
+                    System.out.print("0.0]*");
+                    System.out.println(ctx.SIZE().getText());
+                }
+            }else{
+                System.out.println("]");
+            }
+
+        }else{
+            /** Declarar variable entera con 0 o variable float con 0.0 */
+            //Decidir si hacerla igual a 0 o 0.0
+            if (ctx.TYPE().getText().compareTo("integer") == 0) {
+                System.out.println("0");
+            } else {
+                System.out.println("0.0");
+            }
         }
     }
 

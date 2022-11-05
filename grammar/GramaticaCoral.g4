@@ -6,7 +6,8 @@ commands: command commands | ;
 
 command : declaration | input | set | output;
 
-declaration : TYPE IDENTIFIER;
+declaration : TYPE IDENTIFIER
+| TYPE ARRAY PIZQ SIZE PDER IDENTIFIER;
 
 input : variable ASSIGN GET NEXT INPUT;
 
@@ -38,6 +39,8 @@ number : INTNUM
 variable: IDENTIFIER;
 
 // parser rules start with lowercase letters, lexer rules with uppercase
+ARRAY : 'array';
+SIZE : ('?' | [0-9]+);
 STRING: ["].*?["];
 FLOATNUM : [0-9]+([.][0-9]+);
 INTNUM : [0-9]+;
