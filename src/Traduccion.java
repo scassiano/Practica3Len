@@ -19,4 +19,12 @@ public class Traduccion extends GramaticaCoralBaseListener {
             System.out.println("0.0");
         }
     }
+
+    @Override
+    public void enterInput(GramaticaCoralParser.InputContext ctx){
+        /** Declarar variable entera con 0 o variable float con 0.0 */
+        System.out.println(ctx.variable().getText()+"=input()");
+    }
+
+
 }

@@ -33,4 +33,16 @@ public interface GramaticaCoralVisitor<T> extends ParseTreeVisitor<T> {
 	 * @return the visitor result
 	 */
 	T visitDeclaration(GramaticaCoralParser.DeclarationContext ctx);
+	/**
+	 * Visit a parse tree produced by {@link GramaticaCoralParser#input}.
+	 * @param ctx the parse tree
+	 * @return the visitor result
+	 */
+	T visitInput(GramaticaCoralParser.InputContext ctx);
+	/**
+	 * Visit a parse tree produced by {@link GramaticaCoralParser#variable}.
+	 * @param ctx the parse tree
+	 * @return the visitor result
+	 */
+	T visitVariable(GramaticaCoralParser.VariableContext ctx);
 }
