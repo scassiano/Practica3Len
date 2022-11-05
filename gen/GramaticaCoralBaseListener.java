@@ -147,6 +147,30 @@ public class GramaticaCoralBaseListener implements GramaticaCoralListener {
 	 *
 	 * <p>The default implementation does nothing.</p>
 	 */
+	@Override public void enterArguments(GramaticaCoralParser.ArgumentsContext ctx) { }
+	/**
+	 * {@inheritDoc}
+	 *
+	 * <p>The default implementation does nothing.</p>
+	 */
+	@Override public void exitArguments(GramaticaCoralParser.ArgumentsContext ctx) { }
+	/**
+	 * {@inheritDoc}
+	 *
+	 * <p>The default implementation does nothing.</p>
+	 */
+	@Override public void enterArgumentsprima(GramaticaCoralParser.ArgumentsprimaContext ctx) { }
+	/**
+	 * {@inheritDoc}
+	 *
+	 * <p>The default implementation does nothing.</p>
+	 */
+	@Override public void exitArgumentsprima(GramaticaCoralParser.ArgumentsprimaContext ctx) { }
+	/**
+	 * {@inheritDoc}
+	 *
+	 * <p>The default implementation does nothing.</p>
+	 */
 	@Override public void enterSeedrandomnumbers(GramaticaCoralParser.SeedrandomnumbersContext ctx) { }
 	/**
 	 * {@inheritDoc}

@@ -117,6 +117,26 @@ public interface GramaticaCoralListener extends ParseTreeListener {
 	 */
 	void exitVariable(GramaticaCoralParser.VariableContext ctx);
 	/**
+	 * Enter a parse tree produced by {@link GramaticaCoralParser#arguments}.
+	 * @param ctx the parse tree
+	 */
+	void enterArguments(GramaticaCoralParser.ArgumentsContext ctx);
+	/**
+	 * Exit a parse tree produced by {@link GramaticaCoralParser#arguments}.
+	 * @param ctx the parse tree
+	 */
+	void exitArguments(GramaticaCoralParser.ArgumentsContext ctx);
+	/**
+	 * Enter a parse tree produced by {@link GramaticaCoralParser#argumentsprima}.
+	 * @param ctx the parse tree
+	 */
+	void enterArgumentsprima(GramaticaCoralParser.ArgumentsprimaContext ctx);
+	/**
+	 * Exit a parse tree produced by {@link GramaticaCoralParser#argumentsprima}.
+	 * @param ctx the parse tree
+	 */
+	void exitArgumentsprima(GramaticaCoralParser.ArgumentsprimaContext ctx);
+	/**
 	 * Enter a parse tree produced by {@link GramaticaCoralParser#seedrandomnumbers}.
 	 * @param ctx the parse tree
 	 */

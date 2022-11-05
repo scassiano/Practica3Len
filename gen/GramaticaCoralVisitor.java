@@ -76,6 +76,18 @@ public interface GramaticaCoralVisitor<T> extends ParseTreeVisitor<T> {
 	 */
 	T visitVariable(GramaticaCoralParser.VariableContext ctx);
 	/**
+	 * Visit a parse tree produced by {@link GramaticaCoralParser#arguments}.
+	 * @param ctx the parse tree
+	 * @return the visitor result
+	 */
+	T visitArguments(GramaticaCoralParser.ArgumentsContext ctx);
+	/**
+	 * Visit a parse tree produced by {@link GramaticaCoralParser#argumentsprima}.
+	 * @param ctx the parse tree
+	 * @return the visitor result
+	 */
+	T visitArgumentsprima(GramaticaCoralParser.ArgumentsprimaContext ctx);
+	/**
 	 * Visit a parse tree produced by {@link GramaticaCoralParser#seedrandomnumbers}.
 	 * @param ctx the parse tree
 	 * @return the visitor result

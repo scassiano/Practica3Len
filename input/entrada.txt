@@ -13,4 +13,5 @@ userNums.size = 5
 
 x = RandomNumber(0,1) + AbsoluteValue(-3) + SquareRoot(RandomNumber(2,4)) + RaiseToPower(3,2)
 
+y = mifuncion(32,RandomNumber(232+32,432), SquareRoot(4), miotrafuncion(x))
 Put x to output

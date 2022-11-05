@@ -151,6 +151,11 @@ public class Traduccion extends GramaticaCoralBaseListener {
             System.out.print("abs(");
         } else if (ctx.RANDOMNUMBER() != null) {
             System.out.print("random.randint(");
+        } else {
+            //Esta es una funcion del usuario
+            //Imprimir identificador y un parentesis
+            System.out.print(ctx.IDENTIFIER().getText());
+            System.out.print(ctx.PIZQ().getText());
         }
     }
 

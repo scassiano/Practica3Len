@@ -31,10 +31,16 @@ arithexpr : arithexpr sumop arithexpr
 callfunction: SQUAREROOT PIZQ arithexpr PDER
 | RAISETOPOWER PIZQ arithexpr coma arithexpr PDER
 | ABSOLUTEVALUE PIZQ arithexpr PDER
-| RANDOMNUMBER PIZQ arithexpr coma arithexpr PDER ;
+| RANDOMNUMBER PIZQ arithexpr coma arithexpr PDER
+| IDENTIFIER PIZQ arguments PDER;
 
 //PENDIENTE PERMITIR ARREGLOS EN VARIABLES
 variable: IDENTIFIER | IDENTIFIER cizq arithexpr cder | IDENTIFIER DOT RSIZE;
+
+arguments : arithexpr argumentsprima | ;
+
+argumentsprima : coma arithexpr argumentsprima | ;
+
 
 seedrandomnumbers : SEEDRANDOMNUMBERS PIZQ arithexpr PDER;
 
