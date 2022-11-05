@@ -87,6 +87,46 @@ public interface GramaticaCoralListener extends ParseTreeListener {
 	 */
 	void exitArithexpr(GramaticaCoralParser.ArithexprContext ctx);
 	/**
+	 * Enter a parse tree produced by {@link GramaticaCoralParser#variable}.
+	 * @param ctx the parse tree
+	 */
+	void enterVariable(GramaticaCoralParser.VariableContext ctx);
+	/**
+	 * Exit a parse tree produced by {@link GramaticaCoralParser#variable}.
+	 * @param ctx the parse tree
+	 */
+	void exitVariable(GramaticaCoralParser.VariableContext ctx);
+	/**
+	 * Enter a parse tree produced by {@link GramaticaCoralParser#outvalue}.
+	 * @param ctx the parse tree
+	 */
+	void enterOutvalue(GramaticaCoralParser.OutvalueContext ctx);
+	/**
+	 * Exit a parse tree produced by {@link GramaticaCoralParser#outvalue}.
+	 * @param ctx the parse tree
+	 */
+	void exitOutvalue(GramaticaCoralParser.OutvalueContext ctx);
+	/**
+	 * Enter a parse tree produced by {@link GramaticaCoralParser#size}.
+	 * @param ctx the parse tree
+	 */
+	void enterSize(GramaticaCoralParser.SizeContext ctx);
+	/**
+	 * Exit a parse tree produced by {@link GramaticaCoralParser#size}.
+	 * @param ctx the parse tree
+	 */
+	void exitSize(GramaticaCoralParser.SizeContext ctx);
+	/**
+	 * Enter a parse tree produced by {@link GramaticaCoralParser#assign}.
+	 * @param ctx the parse tree
+	 */
+	void enterAssign(GramaticaCoralParser.AssignContext ctx);
+	/**
+	 * Exit a parse tree produced by {@link GramaticaCoralParser#assign}.
+	 * @param ctx the parse tree
+	 */
+	void exitAssign(GramaticaCoralParser.AssignContext ctx);
+	/**
 	 * Enter a parse tree produced by {@link GramaticaCoralParser#sumop}.
 	 * @param ctx the parse tree
 	 */
@@ -106,6 +146,26 @@ public interface GramaticaCoralListener extends ParseTreeListener {
 	 * @param ctx the parse tree
 	 */
 	void exitMulop(GramaticaCoralParser.MulopContext ctx);
+	/**
+	 * Enter a parse tree produced by {@link GramaticaCoralParser#cizq}.
+	 * @param ctx the parse tree
+	 */
+	void enterCizq(GramaticaCoralParser.CizqContext ctx);
+	/**
+	 * Exit a parse tree produced by {@link GramaticaCoralParser#cizq}.
+	 * @param ctx the parse tree
+	 */
+	void exitCizq(GramaticaCoralParser.CizqContext ctx);
+	/**
+	 * Enter a parse tree produced by {@link GramaticaCoralParser#cder}.
+	 * @param ctx the parse tree
+	 */
+	void enterCder(GramaticaCoralParser.CderContext ctx);
+	/**
+	 * Exit a parse tree produced by {@link GramaticaCoralParser#cder}.
+	 * @param ctx the parse tree
+	 */
+	void exitCder(GramaticaCoralParser.CderContext ctx);
 	/**
 	 * Enter a parse tree produced by {@link GramaticaCoralParser#pizq}.
 	 * @param ctx the parse tree
@@ -137,16 +197,6 @@ public interface GramaticaCoralListener extends ParseTreeListener {
 	 */
 	void exitSign(GramaticaCoralParser.SignContext ctx);
 	/**
-	 * Enter a parse tree produced by {@link GramaticaCoralParser#outvalue}.
-	 * @param ctx the parse tree
-	 */
-	void enterOutvalue(GramaticaCoralParser.OutvalueContext ctx);
-	/**
-	 * Exit a parse tree produced by {@link GramaticaCoralParser#outvalue}.
-	 * @param ctx the parse tree
-	 */
-	void exitOutvalue(GramaticaCoralParser.OutvalueContext ctx);
-	/**
 	 * Enter a parse tree produced by {@link GramaticaCoralParser#number}.
 	 * @param ctx the parse tree
 	 */
@@ -156,14 +206,4 @@ public interface GramaticaCoralListener extends ParseTreeListener {
 	 * @param ctx the parse tree
 	 */
 	void exitNumber(GramaticaCoralParser.NumberContext ctx);
-	/**
-	 * Enter a parse tree produced by {@link GramaticaCoralParser#variable}.
-	 * @param ctx the parse tree
-	 */
-	void enterVariable(GramaticaCoralParser.VariableContext ctx);
-	/**
-	 * Exit a parse tree produced by {@link GramaticaCoralParser#variable}.
-	 * @param ctx the parse tree
-	 */
-	void exitVariable(GramaticaCoralParser.VariableContext ctx);
 }

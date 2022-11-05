@@ -4,6 +4,9 @@ public class Traduccion extends GramaticaCoralBaseListener {
     //Tabla de simbolos para saber tipo de variables
     HashMap<String, String> table = new HashMap<>();
 
+    //Nombre variable que se esta asignando actualmente
+    String currentVariable = new String();
+
     @Override
     public void enterInit(GramaticaCoralParser.InitContext ctx) {
         /** Agregar los imports para las funciones predeterminadas*/
@@ -23,14 +26,14 @@ public class Traduccion extends GramaticaCoralBaseListener {
         if(ctx.ARRAY() != null){
             /** Declarar un array float o integer */
             System.out.print("[");
-            if(ctx.SIZE().getText().compareTo("?") != 0){
+            if(ctx.size().getText().compareTo("?") != 0){
                 //Si la longitud del arreglo NO es signo de interrogacion
                 if (ctx.TYPE().getText().compareTo("integer") == 0){
                     System.out.print("0]*");
-                    System.out.println(ctx.SIZE().getText());
+                    System.out.println(ctx.size().getText());
                 } else {
                     System.out.print("0.0]*");
-                    System.out.println(ctx.SIZE().getText());
+                    System.out.println(ctx.size().getText());
                 }
             }else{
                 System.out.println("]");
@@ -49,23 +52,27 @@ public class Traduccion extends GramaticaCoralBaseListener {
 
     @Override
     public void enterInput(GramaticaCoralParser.InputContext ctx) {
+        //Almacenar la variable que se esta asignando actualmente
+        currentVariable = ctx.variable().IDENTIFIER().getText();
         /** Declarar variable con input*/
-        System.out.println(ctx.variable().getText() + "=input()");
+        //Imprimir solo el identificador de la variable
+        System.out.print(ctx.variable().IDENTIFIER().getText());
+    }
+
+    @Override
+    public void exitInput(GramaticaCoralParser.InputContext ctx){
+        //Imprimir el input y cerrar parentesis del casteo
+        System.out.println("input())");
     }
 
     @Override
     public void enterSet(GramaticaCoralParser.SetContext ctx) {
-        /** Imprimir unicamente la variable y un signo igual*/
-        System.out.print(ctx.variable().getText());
-        System.out.print(ctx.ASSIGN().getText());
-        //Realizar el cast del resultado al tipo de la variable donde se asigna
-        String variableType = table.get(ctx.variable().getText());
-        if (variableType.compareTo("integer") == 0) {
-            System.out.print("int");
-        } else if (variableType.compareTo("float") == 0) {
-            System.out.print("float");
-        }
-        System.out.print("(");
+        //Almacenar la variable que se esta asignando actualmente
+        currentVariable = ctx.variable().IDENTIFIER().getText();
+
+        /** Imprimir identificador de la variable y un signo igual*/
+        System.out.print(ctx.variable().IDENTIFIER().getText());
+
     }
 
     @Override
@@ -127,6 +134,31 @@ public class Traduccion extends GramaticaCoralBaseListener {
     @Override
     public void enterMulop(GramaticaCoralParser.MulopContext ctx) {
         System.out.print(ctx.MULOP().getText());
+    }
+
+    @Override
+    public void enterCizq(GramaticaCoralParser.CizqContext ctx){
+        System.out.print(ctx.CIZQ().getText());
+    }
+
+    @Override
+    public void enterCder(GramaticaCoralParser.CderContext ctx){
+        System.out.print(ctx.CDER().getText());
+    }
+
+    @Override
+    public void enterAssign(GramaticaCoralParser.AssignContext ctx){
+        // Imprimir un signo igual
+        System.out.print(ctx.ASSIGN().getText());
+
+        //Realizar el cast del resultado al tipo de la variable donde se asigna
+        String variableType = table.get(currentVariable);
+        if (variableType.compareTo("integer") == 0) {
+            System.out.print("int");
+        } else if (variableType.compareTo("float") == 0) {
+            System.out.print("float");
+        }
+        System.out.print("(");
     }
 
 }

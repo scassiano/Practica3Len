@@ -58,6 +58,30 @@ public interface GramaticaCoralVisitor<T> extends ParseTreeVisitor<T> {
 	 */
 	T visitArithexpr(GramaticaCoralParser.ArithexprContext ctx);
 	/**
+	 * Visit a parse tree produced by {@link GramaticaCoralParser#variable}.
+	 * @param ctx the parse tree
+	 * @return the visitor result
+	 */
+	T visitVariable(GramaticaCoralParser.VariableContext ctx);
+	/**
+	 * Visit a parse tree produced by {@link GramaticaCoralParser#outvalue}.
+	 * @param ctx the parse tree
+	 * @return the visitor result
+	 */
+	T visitOutvalue(GramaticaCoralParser.OutvalueContext ctx);
+	/**
+	 * Visit a parse tree produced by {@link GramaticaCoralParser#size}.
+	 * @param ctx the parse tree
+	 * @return the visitor result
+	 */
+	T visitSize(GramaticaCoralParser.SizeContext ctx);
+	/**
+	 * Visit a parse tree produced by {@link GramaticaCoralParser#assign}.
+	 * @param ctx the parse tree
+	 * @return the visitor result
+	 */
+	T visitAssign(GramaticaCoralParser.AssignContext ctx);
+	/**
 	 * Visit a parse tree produced by {@link GramaticaCoralParser#sumop}.
 	 * @param ctx the parse tree
 	 * @return the visitor result
@@ -69,6 +93,18 @@ public interface GramaticaCoralVisitor<T> extends ParseTreeVisitor<T> {
 	 * @return the visitor result
 	 */
 	T visitMulop(GramaticaCoralParser.MulopContext ctx);
+	/**
+	 * Visit a parse tree produced by {@link GramaticaCoralParser#cizq}.
+	 * @param ctx the parse tree
+	 * @return the visitor result
+	 */
+	T visitCizq(GramaticaCoralParser.CizqContext ctx);
+	/**
+	 * Visit a parse tree produced by {@link GramaticaCoralParser#cder}.
+	 * @param ctx the parse tree
+	 * @return the visitor result
+	 */
+	T visitCder(GramaticaCoralParser.CderContext ctx);
 	/**
 	 * Visit a parse tree produced by {@link GramaticaCoralParser#pizq}.
 	 * @param ctx the parse tree
@@ -88,21 +124,9 @@ public interface GramaticaCoralVisitor<T> extends ParseTreeVisitor<T> {
 	 */
 	T visitSign(GramaticaCoralParser.SignContext ctx);
 	/**
-	 * Visit a parse tree produced by {@link GramaticaCoralParser#outvalue}.
-	 * @param ctx the parse tree
-	 * @return the visitor result
-	 */
-	T visitOutvalue(GramaticaCoralParser.OutvalueContext ctx);
-	/**
 	 * Visit a parse tree produced by {@link GramaticaCoralParser#number}.
 	 * @param ctx the parse tree
 	 * @return the visitor result
 	 */
 	T visitNumber(GramaticaCoralParser.NumberContext ctx);
-	/**
-	 * Visit a parse tree produced by {@link GramaticaCoralParser#variable}.
-	 * @param ctx the parse tree
-	 * @return the visitor result
-	 */
-	T visitVariable(GramaticaCoralParser.VariableContext ctx);
 }

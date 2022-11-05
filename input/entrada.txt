@@ -1,4 +1,8 @@
-integer array(?) x
-float array(9) y
-integer array(3) z
-float array(?) q
+integer array(?) userNums
+float array(5) userVals
+float x
+float y
+integer i
+
+x = Get next input
+i = Get next input

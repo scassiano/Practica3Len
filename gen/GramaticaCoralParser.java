@@ -16,35 +16,37 @@ public class GramaticaCoralParser extends Parser {
 	protected static final PredictionContextCache _sharedContextCache =
 		new PredictionContextCache();
 	public static final int
-		ARRAY=1, SIZE=2, STRING=3, FLOATNUM=4, INTNUM=5, SUMOP=6, MULOP=7, PIZQ=8, 
-		PDER=9, ASSIGN=10, PUT=11, TO=12, OUTPUT=13, GET=14, NEXT=15, INPUT=16, 
-		TYPE=17, IDENTIFIER=18, WS=19;
+		ARRAY=1, STRING=2, FLOATNUM=3, INTNUM=4, SUMOP=5, MULOP=6, CIZQ=7, CDER=8, 
+		PIZQ=9, PDER=10, ASSIGN=11, PUT=12, TO=13, OUTPUT=14, GET=15, NEXT=16, 
+		INPUT=17, TYPE=18, IDENTIFIER=19, QUESTIONMARK=20, WS=21;
 	public static final int
 		RULE_init = 0, RULE_commands = 1, RULE_command = 2, RULE_declaration = 3, 
-		RULE_input = 4, RULE_set = 5, RULE_output = 6, RULE_arithexpr = 7, RULE_sumop = 8, 
-		RULE_mulop = 9, RULE_pizq = 10, RULE_pder = 11, RULE_sign = 12, RULE_outvalue = 13, 
-		RULE_number = 14, RULE_variable = 15;
+		RULE_input = 4, RULE_set = 5, RULE_output = 6, RULE_arithexpr = 7, RULE_variable = 8, 
+		RULE_outvalue = 9, RULE_size = 10, RULE_assign = 11, RULE_sumop = 12, 
+		RULE_mulop = 13, RULE_cizq = 14, RULE_cder = 15, RULE_pizq = 16, RULE_pder = 17, 
+		RULE_sign = 18, RULE_number = 19;
 	private static String[] makeRuleNames() {
 		return new String[] {
 			"init", "commands", "command", "declaration", "input", "set", "output", 
-			"arithexpr", "sumop", "mulop", "pizq", "pder", "sign", "outvalue", "number", 
-			"variable"
+			"arithexpr", "variable", "outvalue", "size", "assign", "sumop", "mulop", 
+			"cizq", "cder", "pizq", "pder", "sign", "number"
 		};
 	}
 	public static final String[] ruleNames = makeRuleNames();
 
 	private static String[] makeLiteralNames() {
 		return new String[] {
-			null, "'array'", null, null, null, null, null, null, "'('", "')'", "'='", 
-			"'Put'", "'to'", "'output'", "'Get'", "'next'", "'input'"
+			null, "'array'", null, null, null, null, null, "'['", "']'", "'('", "')'", 
+			"'='", "'Put'", "'to'", "'output'", "'Get'", "'next'", "'input'", null, 
+			null, "'?'"
 		};
 	}
 	private static final String[] _LITERAL_NAMES = makeLiteralNames();
 	private static String[] makeSymbolicNames() {
 		return new String[] {
-			null, "ARRAY", "SIZE", "STRING", "FLOATNUM", "INTNUM", "SUMOP", "MULOP", 
-			"PIZQ", "PDER", "ASSIGN", "PUT", "TO", "OUTPUT", "GET", "NEXT", "INPUT", 
-			"TYPE", "IDENTIFIER", "WS"
+			null, "ARRAY", "STRING", "FLOATNUM", "INTNUM", "SUMOP", "MULOP", "CIZQ", 
+			"CDER", "PIZQ", "PDER", "ASSIGN", "PUT", "TO", "OUTPUT", "GET", "NEXT", 
+			"INPUT", "TYPE", "IDENTIFIER", "QUESTIONMARK", "WS"
 		};
 	}
 	private static final String[] _SYMBOLIC_NAMES = makeSymbolicNames();
@@ -128,9 +130,9 @@ public class GramaticaCoralParser extends Parser {
 		try {
 			enterOuterAlt(_localctx, 1);
 			{
-			setState(32);
+			setState(40);
 			commands();
-			setState(33);
+			setState(41);
 			match(EOF);
 			}
 		}
@@ -175,7 +177,7 @@ public class GramaticaCoralParser extends Parser {
 		CommandsContext _localctx = new CommandsContext(_ctx, getState());
 		enterRule(_localctx, 2, RULE_commands);
 		try {
-			setState(39);
+			setState(47);
 			_errHandler.sync(this);
 			switch (_input.LA(1)) {
 			case PUT:
@@ -183,9 +185,9 @@ public class GramaticaCoralParser extends Parser {
 			case IDENTIFIER:
 				enterOuterAlt(_localctx, 1);
 				{
-				setState(35);
+				setState(43);
 				command();
-				setState(36);
+				setState(44);
 				commands();
 				}
 				break;
@@ -245,34 +247,34 @@ public class GramaticaCoralParser extends Parser {
 		CommandContext _localctx = new CommandContext(_ctx, getState());
 		enterRule(_localctx, 4, RULE_command);
 		try {
-			setState(45);
+			setState(53);
 			_errHandler.sync(this);
 			switch ( getInterpreter().adaptivePredict(_input,1,_ctx) ) {
 			case 1:
 				enterOuterAlt(_localctx, 1);
 				{
-				setState(41);
+				setState(49);
 				declaration();
 				}
 				break;
 			case 2:
 				enterOuterAlt(_localctx, 2);
 				{
-				setState(42);
+				setState(50);
 				input();
 				}
 				break;
 			case 3:
 				enterOuterAlt(_localctx, 3);
 				{
-				setState(43);
+				setState(51);
 				set();
 				}
 				break;
 			case 4:
 				enterOuterAlt(_localctx, 4);
 				{
-				setState(44);
+				setState(52);
 				output();
 				}
 				break;
@@ -294,7 +296,9 @@ public class GramaticaCoralParser extends Parser {
 		public TerminalNode IDENTIFIER() { return getToken(GramaticaCoralParser.IDENTIFIER, 0); }
 		public TerminalNode ARRAY() { return getToken(GramaticaCoralParser.ARRAY, 0); }
 		public TerminalNode PIZQ() { return getToken(GramaticaCoralParser.PIZQ, 0); }
-		public TerminalNode SIZE() { return getToken(GramaticaCoralParser.SIZE, 0); }
+		public SizeContext size() {
+			return getRuleContext(SizeContext.class,0);
+		}
 		public TerminalNode PDER() { return getToken(GramaticaCoralParser.PDER, 0); }
 		public DeclarationContext(ParserRuleContext parent, int invokingState) {
 			super(parent, invokingState);
@@ -319,32 +323,32 @@ public class GramaticaCoralParser extends Parser {
 		DeclarationContext _localctx = new DeclarationContext(_ctx, getState());
 		enterRule(_localctx, 6, RULE_declaration);
 		try {
-			setState(55);
+			setState(64);
 			_errHandler.sync(this);
 			switch ( getInterpreter().adaptivePredict(_input,2,_ctx) ) {
 			case 1:
 				enterOuterAlt(_localctx, 1);
 				{
-				setState(47);
+				setState(55);
 				match(TYPE);
-				setState(48);
+				setState(56);
 				match(IDENTIFIER);
 				}
 				break;
 			case 2:
 				enterOuterAlt(_localctx, 2);
 				{
-				setState(49);
+				setState(57);
 				match(TYPE);
-				setState(50);
+				setState(58);
 				match(ARRAY);
-				setState(51);
+				setState(59);
 				match(PIZQ);
-				setState(52);
-				match(SIZE);
-				setState(53);
+				setState(60);
+				size();
+				setState(61);
 				match(PDER);
-				setState(54);
+				setState(62);
 				match(IDENTIFIER);
 				}
 				break;
@@ -365,7 +369,9 @@ public class GramaticaCoralParser extends Parser {
 		public VariableContext variable() {
 			return getRuleContext(VariableContext.class,0);
 		}
-		public TerminalNode ASSIGN() { return getToken(GramaticaCoralParser.ASSIGN, 0); }
+		public AssignContext assign() {
+			return getRuleContext(AssignContext.class,0);
+		}
 		public TerminalNode GET() { return getToken(GramaticaCoralParser.GET, 0); }
 		public TerminalNode NEXT() { return getToken(GramaticaCoralParser.NEXT, 0); }
 		public TerminalNode INPUT() { return getToken(GramaticaCoralParser.INPUT, 0); }
@@ -394,15 +400,15 @@ public class GramaticaCoralParser extends Parser {
 		try {
 			enterOuterAlt(_localctx, 1);
 			{
-			setState(57);
+			setState(66);
 			variable();
-			setState(58);
-			match(ASSIGN);
-			setState(59);
+			setState(67);
+			assign();
+			setState(68);
 			match(GET);
-			setState(60);
+			setState(69);
 			match(NEXT);
-			setState(61);
+			setState(70);
 			match(INPUT);
 			}
 		}
@@ -421,7 +427,9 @@ public class GramaticaCoralParser extends Parser {
 		public VariableContext variable() {
 			return getRuleContext(VariableContext.class,0);
 		}
-		public TerminalNode ASSIGN() { return getToken(GramaticaCoralParser.ASSIGN, 0); }
+		public AssignContext assign() {
+			return getRuleContext(AssignContext.class,0);
+		}
 		public ArithexprContext arithexpr() {
 			return getRuleContext(ArithexprContext.class,0);
 		}
@@ -450,11 +458,11 @@ public class GramaticaCoralParser extends Parser {
 		try {
 			enterOuterAlt(_localctx, 1);
 			{
-			setState(63);
+			setState(72);
 			variable();
-			setState(64);
-			match(ASSIGN);
-			setState(65);
+			setState(73);
+			assign();
+			setState(74);
 			arithexpr(0);
 			}
 		}
@@ -501,13 +509,13 @@ public class GramaticaCoralParser extends Parser {
 		try {
 			enterOuterAlt(_localctx, 1);
 			{
-			setState(67);
+			setState(76);
 			match(PUT);
-			setState(68);
+			setState(77);
 			outvalue();
-			setState(69);
+			setState(78);
 			match(TO);
-			setState(70);
+			setState(79);
 			match(OUTPUT);
 			}
 		}
@@ -584,37 +592,37 @@ public class GramaticaCoralParser extends Parser {
 			int _alt;
 			enterOuterAlt(_localctx, 1);
 			{
-			setState(82);
+			setState(91);
 			_errHandler.sync(this);
 			switch (_input.LA(1)) {
 			case SUMOP:
 				{
-				setState(73);
+				setState(82);
 				sign();
-				setState(74);
+				setState(83);
 				arithexpr(4);
 				}
 				break;
 			case FLOATNUM:
 			case INTNUM:
 				{
-				setState(76);
+				setState(85);
 				number();
 				}
 				break;
 			case PIZQ:
 				{
-				setState(77);
+				setState(86);
 				pizq();
-				setState(78);
+				setState(87);
 				arithexpr(0);
-				setState(79);
+				setState(88);
 				pder();
 				}
 				break;
 			case IDENTIFIER:
 				{
-				setState(81);
+				setState(90);
 				variable();
 				}
 				break;
@@ -622,7 +630,7 @@ public class GramaticaCoralParser extends Parser {
 				throw new NoViableAltException(this);
 			}
 			_ctx.stop = _input.LT(-1);
-			setState(94);
+			setState(103);
 			_errHandler.sync(this);
 			_alt = getInterpreter().adaptivePredict(_input,5,_ctx);
 			while ( _alt!=2 && _alt!=org.antlr.v4.runtime.atn.ATN.INVALID_ALT_NUMBER ) {
@@ -630,18 +638,18 @@ public class GramaticaCoralParser extends Parser {
 					if ( _parseListeners!=null ) triggerExitRuleEvent();
 					_prevctx = _localctx;
 					{
-					setState(92);
+					setState(101);
 					_errHandler.sync(this);
 					switch ( getInterpreter().adaptivePredict(_input,4,_ctx) ) {
 					case 1:
 						{
 						_localctx = new ArithexprContext(_parentctx, _parentState);
 						pushNewRecursionContext(_localctx, _startState, RULE_arithexpr);
-						setState(84);
+						setState(93);
 						if (!(precpred(_ctx, 6))) throw new FailedPredicateException(this, "precpred(_ctx, 6)");
-						setState(85);
+						setState(94);
 						sumop();
-						setState(86);
+						setState(95);
 						arithexpr(7);
 						}
 						break;
@@ -649,18 +657,18 @@ public class GramaticaCoralParser extends Parser {
 						{
 						_localctx = new ArithexprContext(_parentctx, _parentState);
 						pushNewRecursionContext(_localctx, _startState, RULE_arithexpr);
-						setState(88);
+						setState(97);
 						if (!(precpred(_ctx, 5))) throw new FailedPredicateException(this, "precpred(_ctx, 5)");
-						setState(89);
+						setState(98);
 						mulop();
-						setState(90);
+						setState(99);
 						arithexpr(6);
 						}
 						break;
 					}
 					} 
 				}
-				setState(96);
+				setState(105);
 				_errHandler.sync(this);
 				_alt = getInterpreter().adaptivePredict(_input,5,_ctx);
 			}
@@ -677,203 +685,63 @@ public class GramaticaCoralParser extends Parser {
 		return _localctx;
 	}
 
-	public static class SumopContext extends ParserRuleContext {
-		public TerminalNode SUMOP() { return getToken(GramaticaCoralParser.SUMOP, 0); }
-		public SumopContext(ParserRuleContext parent, int invokingState) {
+	public static class VariableContext extends ParserRuleContext {
+		public TerminalNode IDENTIFIER() { return getToken(GramaticaCoralParser.IDENTIFIER, 0); }
+		public CizqContext cizq() {
+			return getRuleContext(CizqContext.class,0);
+		}
+		public ArithexprContext arithexpr() {
+			return getRuleContext(ArithexprContext.class,0);
+		}
+		public CderContext cder() {
+			return getRuleContext(CderContext.class,0);
+		}
+		public VariableContext(ParserRuleContext parent, int invokingState) {
 			super(parent, invokingState);
 		}
-		@Override public int getRuleIndex() { return RULE_sumop; }
+		@Override public int getRuleIndex() { return RULE_variable; }
 		@Override
 		public void enterRule(ParseTreeListener listener) {
-			if ( listener instanceof GramaticaCoralListener ) ((GramaticaCoralListener)listener).enterSumop(this);
+			if ( listener instanceof GramaticaCoralListener ) ((GramaticaCoralListener)listener).enterVariable(this);
 		}
 		@Override
 		public void exitRule(ParseTreeListener listener) {
-			if ( listener instanceof GramaticaCoralListener ) ((GramaticaCoralListener)listener).exitSumop(this);
+			if ( listener instanceof GramaticaCoralListener ) ((GramaticaCoralListener)listener).exitVariable(this);
 		}
 		@Override
 		public <T> T accept(ParseTreeVisitor<? extends T> visitor) {
-			if ( visitor instanceof GramaticaCoralVisitor ) return ((GramaticaCoralVisitor<? extends T>)visitor).visitSumop(this);
+			if ( visitor instanceof GramaticaCoralVisitor ) return ((GramaticaCoralVisitor<? extends T>)visitor).visitVariable(this);
 			else return visitor.visitChildren(this);
 		}
 	}
 
-	public final SumopContext sumop() throws RecognitionException {
-		SumopContext _localctx = new SumopContext(_ctx, getState());
-		enterRule(_localctx, 16, RULE_sumop);
+	public final VariableContext variable() throws RecognitionException {
+		VariableContext _localctx = new VariableContext(_ctx, getState());
+		enterRule(_localctx, 16, RULE_variable);
 		try {
-			enterOuterAlt(_localctx, 1);
-			{
-			setState(97);
-			match(SUMOP);
-			}
-		}
-		catch (RecognitionException re) {
-			_localctx.exception = re;
-			_errHandler.reportError(this, re);
-			_errHandler.recover(this, re);
-		}
-		finally {
-			exitRule();
-		}
-		return _localctx;
-	}
-
-	public static class MulopContext extends ParserRuleContext {
-		public TerminalNode MULOP() { return getToken(GramaticaCoralParser.MULOP, 0); }
-		public MulopContext(ParserRuleContext parent, int invokingState) {
-			super(parent, invokingState);
-		}
-		@Override public int getRuleIndex() { return RULE_mulop; }
-		@Override
-		public void enterRule(ParseTreeListener listener) {
-			if ( listener instanceof GramaticaCoralListener ) ((GramaticaCoralListener)listener).enterMulop(this);
-		}
-		@Override
-		public void exitRule(ParseTreeListener listener) {
-			if ( listener instanceof GramaticaCoralListener ) ((GramaticaCoralListener)listener).exitMulop(this);
-		}
-		@Override
-		public <T> T accept(ParseTreeVisitor<? extends T> visitor) {
-			if ( visitor instanceof GramaticaCoralVisitor ) return ((GramaticaCoralVisitor<? extends T>)visitor).visitMulop(this);
-			else return visitor.visitChildren(this);
-		}
-	}
-
-	public final MulopContext mulop() throws RecognitionException {
-		MulopContext _localctx = new MulopContext(_ctx, getState());
-		enterRule(_localctx, 18, RULE_mulop);
-		try {
-			enterOuterAlt(_localctx, 1);
-			{
-			setState(99);
-			match(MULOP);
-			}
-		}
-		catch (RecognitionException re) {
-			_localctx.exception = re;
-			_errHandler.reportError(this, re);
-			_errHandler.recover(this, re);
-		}
-		finally {
-			exitRule();
-		}
-		return _localctx;
-	}
-
-	public static class PizqContext extends ParserRuleContext {
-		public TerminalNode PIZQ() { return getToken(GramaticaCoralParser.PIZQ, 0); }
-		public PizqContext(ParserRuleContext parent, int invokingState) {
-			super(parent, invokingState);
-		}
-		@Override public int getRuleIndex() { return RULE_pizq; }
-		@Override
-		public void enterRule(ParseTreeListener listener) {
-			if ( listener instanceof GramaticaCoralListener ) ((GramaticaCoralListener)listener).enterPizq(this);
-		}
-		@Override
-		public void exitRule(ParseTreeListener listener) {
-			if ( listener instanceof GramaticaCoralListener ) ((GramaticaCoralListener)listener).exitPizq(this);
-		}
-		@Override
-		public <T> T accept(ParseTreeVisitor<? extends T> visitor) {
-			if ( visitor instanceof GramaticaCoralVisitor ) return ((GramaticaCoralVisitor<? extends T>)visitor).visitPizq(this);
-			else return visitor.visitChildren(this);
-		}
-	}
-
-	public final PizqContext pizq() throws RecognitionException {
-		PizqContext _localctx = new PizqContext(_ctx, getState());
-		enterRule(_localctx, 20, RULE_pizq);
-		try {
-			enterOuterAlt(_localctx, 1);
-			{
-			setState(101);
-			match(PIZQ);
-			}
-		}
-		catch (RecognitionException re) {
-			_localctx.exception = re;
-			_errHandler.reportError(this, re);
-			_errHandler.recover(this, re);
-		}
-		finally {
-			exitRule();
-		}
-		return _localctx;
-	}
-
-	public static class PderContext extends ParserRuleContext {
-		public TerminalNode PDER() { return getToken(GramaticaCoralParser.PDER, 0); }
-		public PderContext(ParserRuleContext parent, int invokingState) {
-			super(parent, invokingState);
-		}
-		@Override public int getRuleIndex() { return RULE_pder; }
-		@Override
-		public void enterRule(ParseTreeListener listener) {
-			if ( listener instanceof GramaticaCoralListener ) ((GramaticaCoralListener)listener).enterPder(this);
-		}
-		@Override
-		public void exitRule(ParseTreeListener listener) {
-			if ( listener instanceof GramaticaCoralListener ) ((GramaticaCoralListener)listener).exitPder(this);
-		}
-		@Override
-		public <T> T accept(ParseTreeVisitor<? extends T> visitor) {
-			if ( visitor instanceof GramaticaCoralVisitor ) return ((GramaticaCoralVisitor<? extends T>)visitor).visitPder(this);
-			else return visitor.visitChildren(this);
-		}
-	}
-
-	public final PderContext pder() throws RecognitionException {
-		PderContext _localctx = new PderContext(_ctx, getState());
-		enterRule(_localctx, 22, RULE_pder);
-		try {
-			enterOuterAlt(_localctx, 1);
-			{
-			setState(103);
-			match(PDER);
-			}
-		}
-		catch (RecognitionException re) {
-			_localctx.exception = re;
-			_errHandler.reportError(this, re);
-			_errHandler.recover(this, re);
-		}
-		finally {
-			exitRule();
-		}
-		return _localctx;
-	}
-
-	public static class SignContext extends ParserRuleContext {
-		public TerminalNode SUMOP() { return getToken(GramaticaCoralParser.SUMOP, 0); }
-		public SignContext(ParserRuleContext parent, int invokingState) {
-			super(parent, invokingState);
-		}
-		@Override public int getRuleIndex() { return RULE_sign; }
-		@Override
-		public void enterRule(ParseTreeListener listener) {
-			if ( listener instanceof GramaticaCoralListener ) ((GramaticaCoralListener)listener).enterSign(this);
-		}
-		@Override
-		public void exitRule(ParseTreeListener listener) {
-			if ( listener instanceof GramaticaCoralListener ) ((GramaticaCoralListener)listener).exitSign(this);
-		}
-		@Override
-		public <T> T accept(ParseTreeVisitor<? extends T> visitor) {
-			if ( visitor instanceof GramaticaCoralVisitor ) return ((GramaticaCoralVisitor<? extends T>)visitor).visitSign(this);
-			else return visitor.visitChildren(this);
-		}
-	}
-
-	public final SignContext sign() throws RecognitionException {
-		SignContext _localctx = new SignContext(_ctx, getState());
-		enterRule(_localctx, 24, RULE_sign);
-		try {
-			enterOuterAlt(_localctx, 1);
-			{
-			setState(105);
-			match(SUMOP);
+			setState(112);
+			_errHandler.sync(this);
+			switch ( getInterpreter().adaptivePredict(_input,6,_ctx) ) {
+			case 1:
+				enterOuterAlt(_localctx, 1);
+				{
+				setState(106);
+				match(IDENTIFIER);
+				}
+				break;
+			case 2:
+				enterOuterAlt(_localctx, 2);
+				{
+				setState(107);
+				match(IDENTIFIER);
+				setState(108);
+				cizq();
+				setState(109);
+				arithexpr(0);
+				setState(110);
+				cder();
+				}
+				break;
 			}
 		}
 		catch (RecognitionException re) {
@@ -913,9 +781,9 @@ public class GramaticaCoralParser extends Parser {
 
 	public final OutvalueContext outvalue() throws RecognitionException {
 		OutvalueContext _localctx = new OutvalueContext(_ctx, getState());
-		enterRule(_localctx, 26, RULE_outvalue);
+		enterRule(_localctx, 18, RULE_outvalue);
 		try {
-			setState(109);
+			setState(116);
 			_errHandler.sync(this);
 			switch (_input.LA(1)) {
 			case FLOATNUM:
@@ -925,19 +793,407 @@ public class GramaticaCoralParser extends Parser {
 			case IDENTIFIER:
 				enterOuterAlt(_localctx, 1);
 				{
-				setState(107);
+				setState(114);
 				arithexpr(0);
 				}
 				break;
 			case STRING:
 				enterOuterAlt(_localctx, 2);
 				{
-				setState(108);
+				setState(115);
 				match(STRING);
 				}
 				break;
 			default:
 				throw new NoViableAltException(this);
+			}
+		}
+		catch (RecognitionException re) {
+			_localctx.exception = re;
+			_errHandler.reportError(this, re);
+			_errHandler.recover(this, re);
+		}
+		finally {
+			exitRule();
+		}
+		return _localctx;
+	}
+
+	public static class SizeContext extends ParserRuleContext {
+		public TerminalNode QUESTIONMARK() { return getToken(GramaticaCoralParser.QUESTIONMARK, 0); }
+		public TerminalNode INTNUM() { return getToken(GramaticaCoralParser.INTNUM, 0); }
+		public SizeContext(ParserRuleContext parent, int invokingState) {
+			super(parent, invokingState);
+		}
+		@Override public int getRuleIndex() { return RULE_size; }
+		@Override
+		public void enterRule(ParseTreeListener listener) {
+			if ( listener instanceof GramaticaCoralListener ) ((GramaticaCoralListener)listener).enterSize(this);
+		}
+		@Override
+		public void exitRule(ParseTreeListener listener) {
+			if ( listener instanceof GramaticaCoralListener ) ((GramaticaCoralListener)listener).exitSize(this);
+		}
+		@Override
+		public <T> T accept(ParseTreeVisitor<? extends T> visitor) {
+			if ( visitor instanceof GramaticaCoralVisitor ) return ((GramaticaCoralVisitor<? extends T>)visitor).visitSize(this);
+			else return visitor.visitChildren(this);
+		}
+	}
+
+	public final SizeContext size() throws RecognitionException {
+		SizeContext _localctx = new SizeContext(_ctx, getState());
+		enterRule(_localctx, 20, RULE_size);
+		int _la;
+		try {
+			enterOuterAlt(_localctx, 1);
+			{
+			setState(118);
+			_la = _input.LA(1);
+			if ( !(_la==INTNUM || _la==QUESTIONMARK) ) {
+			_errHandler.recoverInline(this);
+			}
+			else {
+				if ( _input.LA(1)==Token.EOF ) matchedEOF = true;
+				_errHandler.reportMatch(this);
+				consume();
+			}
+			}
+		}
+		catch (RecognitionException re) {
+			_localctx.exception = re;
+			_errHandler.reportError(this, re);
+			_errHandler.recover(this, re);
+		}
+		finally {
+			exitRule();
+		}
+		return _localctx;
+	}
+
+	public static class AssignContext extends ParserRuleContext {
+		public TerminalNode ASSIGN() { return getToken(GramaticaCoralParser.ASSIGN, 0); }
+		public AssignContext(ParserRuleContext parent, int invokingState) {
+			super(parent, invokingState);
+		}
+		@Override public int getRuleIndex() { return RULE_assign; }
+		@Override
+		public void enterRule(ParseTreeListener listener) {
+			if ( listener instanceof GramaticaCoralListener ) ((GramaticaCoralListener)listener).enterAssign(this);
+		}
+		@Override
+		public void exitRule(ParseTreeListener listener) {
+			if ( listener instanceof GramaticaCoralListener ) ((GramaticaCoralListener)listener).exitAssign(this);
+		}
+		@Override
+		public <T> T accept(ParseTreeVisitor<? extends T> visitor) {
+			if ( visitor instanceof GramaticaCoralVisitor ) return ((GramaticaCoralVisitor<? extends T>)visitor).visitAssign(this);
+			else return visitor.visitChildren(this);
+		}
+	}
+
+	public final AssignContext assign() throws RecognitionException {
+		AssignContext _localctx = new AssignContext(_ctx, getState());
+		enterRule(_localctx, 22, RULE_assign);
+		try {
+			enterOuterAlt(_localctx, 1);
+			{
+			setState(120);
+			match(ASSIGN);
+			}
+		}
+		catch (RecognitionException re) {
+			_localctx.exception = re;
+			_errHandler.reportError(this, re);
+			_errHandler.recover(this, re);
+		}
+		finally {
+			exitRule();
+		}
+		return _localctx;
+	}
+
+	public static class SumopContext extends ParserRuleContext {
+		public TerminalNode SUMOP() { return getToken(GramaticaCoralParser.SUMOP, 0); }
+		public SumopContext(ParserRuleContext parent, int invokingState) {
+			super(parent, invokingState);
+		}
+		@Override public int getRuleIndex() { return RULE_sumop; }
+		@Override
+		public void enterRule(ParseTreeListener listener) {
+			if ( listener instanceof GramaticaCoralListener ) ((GramaticaCoralListener)listener).enterSumop(this);
+		}
+		@Override
+		public void exitRule(ParseTreeListener listener) {
+			if ( listener instanceof GramaticaCoralListener ) ((GramaticaCoralListener)listener).exitSumop(this);
+		}
+		@Override
+		public <T> T accept(ParseTreeVisitor<? extends T> visitor) {
+			if ( visitor instanceof GramaticaCoralVisitor ) return ((GramaticaCoralVisitor<? extends T>)visitor).visitSumop(this);
+			else return visitor.visitChildren(this);
+		}
+	}
+
+	public final SumopContext sumop() throws RecognitionException {
+		SumopContext _localctx = new SumopContext(_ctx, getState());
+		enterRule(_localctx, 24, RULE_sumop);
+		try {
+			enterOuterAlt(_localctx, 1);
+			{
+			setState(122);
+			match(SUMOP);
+			}
+		}
+		catch (RecognitionException re) {
+			_localctx.exception = re;
+			_errHandler.reportError(this, re);
+			_errHandler.recover(this, re);
+		}
+		finally {
+			exitRule();
+		}
+		return _localctx;
+	}
+
+	public static class MulopContext extends ParserRuleContext {
+		public TerminalNode MULOP() { return getToken(GramaticaCoralParser.MULOP, 0); }
+		public MulopContext(ParserRuleContext parent, int invokingState) {
+			super(parent, invokingState);
+		}
+		@Override public int getRuleIndex() { return RULE_mulop; }
+		@Override
+		public void enterRule(ParseTreeListener listener) {
+			if ( listener instanceof GramaticaCoralListener ) ((GramaticaCoralListener)listener).enterMulop(this);
+		}
+		@Override
+		public void exitRule(ParseTreeListener listener) {
+			if ( listener instanceof GramaticaCoralListener ) ((GramaticaCoralListener)listener).exitMulop(this);
+		}
+		@Override
+		public <T> T accept(ParseTreeVisitor<? extends T> visitor) {
+			if ( visitor instanceof GramaticaCoralVisitor ) return ((GramaticaCoralVisitor<? extends T>)visitor).visitMulop(this);
+			else return visitor.visitChildren(this);
+		}
+	}
+
+	public final MulopContext mulop() throws RecognitionException {
+		MulopContext _localctx = new MulopContext(_ctx, getState());
+		enterRule(_localctx, 26, RULE_mulop);
+		try {
+			enterOuterAlt(_localctx, 1);
+			{
+			setState(124);
+			match(MULOP);
+			}
+		}
+		catch (RecognitionException re) {
+			_localctx.exception = re;
+			_errHandler.reportError(this, re);
+			_errHandler.recover(this, re);
+		}
+		finally {
+			exitRule();
+		}
+		return _localctx;
+	}
+
+	public static class CizqContext extends ParserRuleContext {
+		public TerminalNode CIZQ() { return getToken(GramaticaCoralParser.CIZQ, 0); }
+		public CizqContext(ParserRuleContext parent, int invokingState) {
+			super(parent, invokingState);
+		}
+		@Override public int getRuleIndex() { return RULE_cizq; }
+		@Override
+		public void enterRule(ParseTreeListener listener) {
+			if ( listener instanceof GramaticaCoralListener ) ((GramaticaCoralListener)listener).enterCizq(this);
+		}
+		@Override
+		public void exitRule(ParseTreeListener listener) {
+			if ( listener instanceof GramaticaCoralListener ) ((GramaticaCoralListener)listener).exitCizq(this);
+		}
+		@Override
+		public <T> T accept(ParseTreeVisitor<? extends T> visitor) {
+			if ( visitor instanceof GramaticaCoralVisitor ) return ((GramaticaCoralVisitor<? extends T>)visitor).visitCizq(this);
+			else return visitor.visitChildren(this);
+		}
+	}
+
+	public final CizqContext cizq() throws RecognitionException {
+		CizqContext _localctx = new CizqContext(_ctx, getState());
+		enterRule(_localctx, 28, RULE_cizq);
+		try {
+			enterOuterAlt(_localctx, 1);
+			{
+			setState(126);
+			match(CIZQ);
+			}
+		}
+		catch (RecognitionException re) {
+			_localctx.exception = re;
+			_errHandler.reportError(this, re);
+			_errHandler.recover(this, re);
+		}
+		finally {
+			exitRule();
+		}
+		return _localctx;
+	}
+
+	public static class CderContext extends ParserRuleContext {
+		public TerminalNode CDER() { return getToken(GramaticaCoralParser.CDER, 0); }
+		public CderContext(ParserRuleContext parent, int invokingState) {
+			super(parent, invokingState);
+		}
+		@Override public int getRuleIndex() { return RULE_cder; }
+		@Override
+		public void enterRule(ParseTreeListener listener) {
+			if ( listener instanceof GramaticaCoralListener ) ((GramaticaCoralListener)listener).enterCder(this);
+		}
+		@Override
+		public void exitRule(ParseTreeListener listener) {
+			if ( listener instanceof GramaticaCoralListener ) ((GramaticaCoralListener)listener).exitCder(this);
+		}
+		@Override
+		public <T> T accept(ParseTreeVisitor<? extends T> visitor) {
+			if ( visitor instanceof GramaticaCoralVisitor ) return ((GramaticaCoralVisitor<? extends T>)visitor).visitCder(this);
+			else return visitor.visitChildren(this);
+		}
+	}
+
+	public final CderContext cder() throws RecognitionException {
+		CderContext _localctx = new CderContext(_ctx, getState());
+		enterRule(_localctx, 30, RULE_cder);
+		try {
+			enterOuterAlt(_localctx, 1);
+			{
+			setState(128);
+			match(CDER);
+			}
+		}
+		catch (RecognitionException re) {
+			_localctx.exception = re;
+			_errHandler.reportError(this, re);
+			_errHandler.recover(this, re);
+		}
+		finally {
+			exitRule();
+		}
+		return _localctx;
+	}
+
+	public static class PizqContext extends ParserRuleContext {
+		public TerminalNode PIZQ() { return getToken(GramaticaCoralParser.PIZQ, 0); }
+		public PizqContext(ParserRuleContext parent, int invokingState) {
+			super(parent, invokingState);
+		}
+		@Override public int getRuleIndex() { return RULE_pizq; }
+		@Override
+		public void enterRule(ParseTreeListener listener) {
+			if ( listener instanceof GramaticaCoralListener ) ((GramaticaCoralListener)listener).enterPizq(this);
+		}
+		@Override
+		public void exitRule(ParseTreeListener listener) {
+			if ( listener instanceof GramaticaCoralListener ) ((GramaticaCoralListener)listener).exitPizq(this);
+		}
+		@Override
+		public <T> T accept(ParseTreeVisitor<? extends T> visitor) {
+			if ( visitor instanceof GramaticaCoralVisitor ) return ((GramaticaCoralVisitor<? extends T>)visitor).visitPizq(this);
+			else return visitor.visitChildren(this);
+		}
+	}
+
+	public final PizqContext pizq() throws RecognitionException {
+		PizqContext _localctx = new PizqContext(_ctx, getState());
+		enterRule(_localctx, 32, RULE_pizq);
+		try {
+			enterOuterAlt(_localctx, 1);
+			{
+			setState(130);
+			match(PIZQ);
+			}
+		}
+		catch (RecognitionException re) {
+			_localctx.exception = re;
+			_errHandler.reportError(this, re);
+			_errHandler.recover(this, re);
+		}
+		finally {
+			exitRule();
+		}
+		return _localctx;
+	}
+
+	public static class PderContext extends ParserRuleContext {
+		public TerminalNode PDER() { return getToken(GramaticaCoralParser.PDER, 0); }
+		public PderContext(ParserRuleContext parent, int invokingState) {
+			super(parent, invokingState);
+		}
+		@Override public int getRuleIndex() { return RULE_pder; }
+		@Override
+		public void enterRule(ParseTreeListener listener) {
+			if ( listener instanceof GramaticaCoralListener ) ((GramaticaCoralListener)listener).enterPder(this);
+		}
+		@Override
+		public void exitRule(ParseTreeListener listener) {
+			if ( listener instanceof GramaticaCoralListener ) ((GramaticaCoralListener)listener).exitPder(this);
+		}
+		@Override
+		public <T> T accept(ParseTreeVisitor<? extends T> visitor) {
+			if ( visitor instanceof GramaticaCoralVisitor ) return ((GramaticaCoralVisitor<? extends T>)visitor).visitPder(this);
+			else return visitor.visitChildren(this);
+		}
+	}
+
+	public final PderContext pder() throws RecognitionException {
+		PderContext _localctx = new PderContext(_ctx, getState());
+		enterRule(_localctx, 34, RULE_pder);
+		try {
+			enterOuterAlt(_localctx, 1);
+			{
+			setState(132);
+			match(PDER);
+			}
+		}
+		catch (RecognitionException re) {
+			_localctx.exception = re;
+			_errHandler.reportError(this, re);
+			_errHandler.recover(this, re);
+		}
+		finally {
+			exitRule();
+		}
+		return _localctx;
+	}
+
+	public static class SignContext extends ParserRuleContext {
+		public TerminalNode SUMOP() { return getToken(GramaticaCoralParser.SUMOP, 0); }
+		public SignContext(ParserRuleContext parent, int invokingState) {
+			super(parent, invokingState);
+		}
+		@Override public int getRuleIndex() { return RULE_sign; }
+		@Override
+		public void enterRule(ParseTreeListener listener) {
+			if ( listener instanceof GramaticaCoralListener ) ((GramaticaCoralListener)listener).enterSign(this);
+		}
+		@Override
+		public void exitRule(ParseTreeListener listener) {
+			if ( listener instanceof GramaticaCoralListener ) ((GramaticaCoralListener)listener).exitSign(this);
+		}
+		@Override
+		public <T> T accept(ParseTreeVisitor<? extends T> visitor) {
+			if ( visitor instanceof GramaticaCoralVisitor ) return ((GramaticaCoralVisitor<? extends T>)visitor).visitSign(this);
+			else return visitor.visitChildren(this);
+		}
+	}
+
+	public final SignContext sign() throws RecognitionException {
+		SignContext _localctx = new SignContext(_ctx, getState());
+		enterRule(_localctx, 36, RULE_sign);
+		try {
+			enterOuterAlt(_localctx, 1);
+			{
+			setState(134);
+			match(SUMOP);
 			}
 		}
 		catch (RecognitionException re) {
@@ -975,12 +1231,12 @@ public class GramaticaCoralParser extends Parser {
 
 	public final NumberContext number() throws RecognitionException {
 		NumberContext _localctx = new NumberContext(_ctx, getState());
-		enterRule(_localctx, 28, RULE_number);
+		enterRule(_localctx, 38, RULE_number);
 		int _la;
 		try {
 			enterOuterAlt(_localctx, 1);
 			{
-			setState(111);
+			setState(136);
 			_la = _input.LA(1);
 			if ( !(_la==FLOATNUM || _la==INTNUM) ) {
 			_errHandler.recoverInline(this);
@@ -990,48 +1246,6 @@ public class GramaticaCoralParser extends Parser {
 				_errHandler.reportMatch(this);
 				consume();
 			}
-			}
-		}
-		catch (RecognitionException re) {
-			_localctx.exception = re;
-			_errHandler.reportError(this, re);
-			_errHandler.recover(this, re);
-		}
-		finally {
-			exitRule();
-		}
-		return _localctx;
-	}
-
-	public static class VariableContext extends ParserRuleContext {
-		public TerminalNode IDENTIFIER() { return getToken(GramaticaCoralParser.IDENTIFIER, 0); }
-		public VariableContext(ParserRuleContext parent, int invokingState) {
-			super(parent, invokingState);
-		}
-		@Override public int getRuleIndex() { return RULE_variable; }
-		@Override
-		public void enterRule(ParseTreeListener listener) {
-			if ( listener instanceof GramaticaCoralListener ) ((GramaticaCoralListener)listener).enterVariable(this);
-		}
-		@Override
-		public void exitRule(ParseTreeListener listener) {
-			if ( listener instanceof GramaticaCoralListener ) ((GramaticaCoralListener)listener).exitVariable(this);
-		}
-		@Override
-		public <T> T accept(ParseTreeVisitor<? extends T> visitor) {
-			if ( visitor instanceof GramaticaCoralVisitor ) return ((GramaticaCoralVisitor<? extends T>)visitor).visitVariable(this);
-			else return visitor.visitChildren(this);
-		}
-	}
-
-	public final VariableContext variable() throws RecognitionException {
-		VariableContext _localctx = new VariableContext(_ctx, getState());
-		enterRule(_localctx, 30, RULE_variable);
-		try {
-			enterOuterAlt(_localctx, 1);
-			{
-			setState(113);
-			match(IDENTIFIER);
 			}
 		}
 		catch (RecognitionException re) {
@@ -1063,68 +1277,81 @@ public class GramaticaCoralParser extends Parser {
 	}
 
 	public static final String _serializedATN =
-		"\u0004\u0001\u0013t\u0002\u0000\u0007\u0000\u0002\u0001\u0007\u0001\u0002"+
-		"\u0002\u0007\u0002\u0002\u0003\u0007\u0003\u0002\u0004\u0007\u0004\u0002"+
-		"\u0005\u0007\u0005\u0002\u0006\u0007\u0006\u0002\u0007\u0007\u0007\u0002"+
-		"\b\u0007\b\u0002\t\u0007\t\u0002\n\u0007\n\u0002\u000b\u0007\u000b\u0002"+
-		"\f\u0007\f\u0002\r\u0007\r\u0002\u000e\u0007\u000e\u0002\u000f\u0007\u000f"+
-		"\u0001\u0000\u0001\u0000\u0001\u0000\u0001\u0001\u0001\u0001\u0001\u0001"+
-		"\u0001\u0001\u0003\u0001(\b\u0001\u0001\u0002\u0001\u0002\u0001\u0002"+
-		"\u0001\u0002\u0003\u0002.\b\u0002\u0001\u0003\u0001\u0003\u0001\u0003"+
-		"\u0001\u0003\u0001\u0003\u0001\u0003\u0001\u0003\u0001\u0003\u0003\u0003"+
-		"8\b\u0003\u0001\u0004\u0001\u0004\u0001\u0004\u0001\u0004\u0001\u0004"+
-		"\u0001\u0004\u0001\u0005\u0001\u0005\u0001\u0005\u0001\u0005\u0001\u0006"+
-		"\u0001\u0006\u0001\u0006\u0001\u0006\u0001\u0006\u0001\u0007\u0001\u0007"+
-		"\u0001\u0007\u0001\u0007\u0001\u0007\u0001\u0007\u0001\u0007\u0001\u0007"+
-		"\u0001\u0007\u0001\u0007\u0003\u0007S\b\u0007\u0001\u0007\u0001\u0007"+
-		"\u0001\u0007\u0001\u0007\u0001\u0007\u0001\u0007\u0001\u0007\u0001\u0007"+
-		"\u0005\u0007]\b\u0007\n\u0007\f\u0007`\t\u0007\u0001\b\u0001\b\u0001\t"+
-		"\u0001\t\u0001\n\u0001\n\u0001\u000b\u0001\u000b\u0001\f\u0001\f\u0001"+
-		"\r\u0001\r\u0003\rn\b\r\u0001\u000e\u0001\u000e\u0001\u000f\u0001\u000f"+
-		"\u0001\u000f\u0000\u0001\u000e\u0010\u0000\u0002\u0004\u0006\b\n\f\u000e"+
-		"\u0010\u0012\u0014\u0016\u0018\u001a\u001c\u001e\u0000\u0001\u0001\u0000"+
-		"\u0004\u0005n\u0000 \u0001\u0000\u0000\u0000\u0002\'\u0001\u0000\u0000"+
-		"\u0000\u0004-\u0001\u0000\u0000\u0000\u00067\u0001\u0000\u0000\u0000\b"+
-		"9\u0001\u0000\u0000\u0000\n?\u0001\u0000\u0000\u0000\fC\u0001\u0000\u0000"+
-		"\u0000\u000eR\u0001\u0000\u0000\u0000\u0010a\u0001\u0000\u0000\u0000\u0012"+
-		"c\u0001\u0000\u0000\u0000\u0014e\u0001\u0000\u0000\u0000\u0016g\u0001"+
-		"\u0000\u0000\u0000\u0018i\u0001\u0000\u0000\u0000\u001am\u0001\u0000\u0000"+
-		"\u0000\u001co\u0001\u0000\u0000\u0000\u001eq\u0001\u0000\u0000\u0000 "+
-		"!\u0003\u0002\u0001\u0000!\"\u0005\u0000\u0000\u0001\"\u0001\u0001\u0000"+
-		"\u0000\u0000#$\u0003\u0004\u0002\u0000$%\u0003\u0002\u0001\u0000%(\u0001"+
-		"\u0000\u0000\u0000&(\u0001\u0000\u0000\u0000\'#\u0001\u0000\u0000\u0000"+
-		"\'&\u0001\u0000\u0000\u0000(\u0003\u0001\u0000\u0000\u0000).\u0003\u0006"+
-		"\u0003\u0000*.\u0003\b\u0004\u0000+.\u0003\n\u0005\u0000,.\u0003\f\u0006"+
-		"\u0000-)\u0001\u0000\u0000\u0000-*\u0001\u0000\u0000\u0000-+\u0001\u0000"+
-		"\u0000\u0000-,\u0001\u0000\u0000\u0000.\u0005\u0001\u0000\u0000\u0000"+
-		"/0\u0005\u0011\u0000\u000008\u0005\u0012\u0000\u000012\u0005\u0011\u0000"+
-		"\u000023\u0005\u0001\u0000\u000034\u0005\b\u0000\u000045\u0005\u0002\u0000"+
-		"\u000056\u0005\t\u0000\u000068\u0005\u0012\u0000\u00007/\u0001\u0000\u0000"+
-		"\u000071\u0001\u0000\u0000\u00008\u0007\u0001\u0000\u0000\u00009:\u0003"+
-		"\u001e\u000f\u0000:;\u0005\n\u0000\u0000;<\u0005\u000e\u0000\u0000<=\u0005"+
-		"\u000f\u0000\u0000=>\u0005\u0010\u0000\u0000>\t\u0001\u0000\u0000\u0000"+
-		"?@\u0003\u001e\u000f\u0000@A\u0005\n\u0000\u0000AB\u0003\u000e\u0007\u0000"+
-		"B\u000b\u0001\u0000\u0000\u0000CD\u0005\u000b\u0000\u0000DE\u0003\u001a"+
-		"\r\u0000EF\u0005\f\u0000\u0000FG\u0005\r\u0000\u0000G\r\u0001\u0000\u0000"+
-		"\u0000HI\u0006\u0007\uffff\uffff\u0000IJ\u0003\u0018\f\u0000JK\u0003\u000e"+
-		"\u0007\u0004KS\u0001\u0000\u0000\u0000LS\u0003\u001c\u000e\u0000MN\u0003"+
-		"\u0014\n\u0000NO\u0003\u000e\u0007\u0000OP\u0003\u0016\u000b\u0000PS\u0001"+
-		"\u0000\u0000\u0000QS\u0003\u001e\u000f\u0000RH\u0001\u0000\u0000\u0000"+
-		"RL\u0001\u0000\u0000\u0000RM\u0001\u0000\u0000\u0000RQ\u0001\u0000\u0000"+
-		"\u0000S^\u0001\u0000\u0000\u0000TU\n\u0006\u0000\u0000UV\u0003\u0010\b"+
-		"\u0000VW\u0003\u000e\u0007\u0007W]\u0001\u0000\u0000\u0000XY\n\u0005\u0000"+
-		"\u0000YZ\u0003\u0012\t\u0000Z[\u0003\u000e\u0007\u0006[]\u0001\u0000\u0000"+
-		"\u0000\\T\u0001\u0000\u0000\u0000\\X\u0001\u0000\u0000\u0000]`\u0001\u0000"+
-		"\u0000\u0000^\\\u0001\u0000\u0000\u0000^_\u0001\u0000\u0000\u0000_\u000f"+
-		"\u0001\u0000\u0000\u0000`^\u0001\u0000\u0000\u0000ab\u0005\u0006\u0000"+
-		"\u0000b\u0011\u0001\u0000\u0000\u0000cd\u0005\u0007\u0000\u0000d\u0013"+
-		"\u0001\u0000\u0000\u0000ef\u0005\b\u0000\u0000f\u0015\u0001\u0000\u0000"+
-		"\u0000gh\u0005\t\u0000\u0000h\u0017\u0001\u0000\u0000\u0000ij\u0005\u0006"+
-		"\u0000\u0000j\u0019\u0001\u0000\u0000\u0000kn\u0003\u000e\u0007\u0000"+
-		"ln\u0005\u0003\u0000\u0000mk\u0001\u0000\u0000\u0000ml\u0001\u0000\u0000"+
-		"\u0000n\u001b\u0001\u0000\u0000\u0000op\u0007\u0000\u0000\u0000p\u001d"+
-		"\u0001\u0000\u0000\u0000qr\u0005\u0012\u0000\u0000r\u001f\u0001\u0000"+
-		"\u0000\u0000\u0007\'-7R\\^m";
+		"\u0004\u0001\u0015\u008b\u0002\u0000\u0007\u0000\u0002\u0001\u0007\u0001"+
+		"\u0002\u0002\u0007\u0002\u0002\u0003\u0007\u0003\u0002\u0004\u0007\u0004"+
+		"\u0002\u0005\u0007\u0005\u0002\u0006\u0007\u0006\u0002\u0007\u0007\u0007"+
+		"\u0002\b\u0007\b\u0002\t\u0007\t\u0002\n\u0007\n\u0002\u000b\u0007\u000b"+
+		"\u0002\f\u0007\f\u0002\r\u0007\r\u0002\u000e\u0007\u000e\u0002\u000f\u0007"+
+		"\u000f\u0002\u0010\u0007\u0010\u0002\u0011\u0007\u0011\u0002\u0012\u0007"+
+		"\u0012\u0002\u0013\u0007\u0013\u0001\u0000\u0001\u0000\u0001\u0000\u0001"+
+		"\u0001\u0001\u0001\u0001\u0001\u0001\u0001\u0003\u00010\b\u0001\u0001"+
+		"\u0002\u0001\u0002\u0001\u0002\u0001\u0002\u0003\u00026\b\u0002\u0001"+
+		"\u0003\u0001\u0003\u0001\u0003\u0001\u0003\u0001\u0003\u0001\u0003\u0001"+
+		"\u0003\u0001\u0003\u0001\u0003\u0003\u0003A\b\u0003\u0001\u0004\u0001"+
+		"\u0004\u0001\u0004\u0001\u0004\u0001\u0004\u0001\u0004\u0001\u0005\u0001"+
+		"\u0005\u0001\u0005\u0001\u0005\u0001\u0006\u0001\u0006\u0001\u0006\u0001"+
+		"\u0006\u0001\u0006\u0001\u0007\u0001\u0007\u0001\u0007\u0001\u0007\u0001"+
+		"\u0007\u0001\u0007\u0001\u0007\u0001\u0007\u0001\u0007\u0001\u0007\u0003"+
+		"\u0007\\\b\u0007\u0001\u0007\u0001\u0007\u0001\u0007\u0001\u0007\u0001"+
+		"\u0007\u0001\u0007\u0001\u0007\u0001\u0007\u0005\u0007f\b\u0007\n\u0007"+
+		"\f\u0007i\t\u0007\u0001\b\u0001\b\u0001\b\u0001\b\u0001\b\u0001\b\u0003"+
+		"\bq\b\b\u0001\t\u0001\t\u0003\tu\b\t\u0001\n\u0001\n\u0001\u000b\u0001"+
+		"\u000b\u0001\f\u0001\f\u0001\r\u0001\r\u0001\u000e\u0001\u000e\u0001\u000f"+
+		"\u0001\u000f\u0001\u0010\u0001\u0010\u0001\u0011\u0001\u0011\u0001\u0012"+
+		"\u0001\u0012\u0001\u0013\u0001\u0013\u0001\u0013\u0000\u0001\u000e\u0014"+
+		"\u0000\u0002\u0004\u0006\b\n\f\u000e\u0010\u0012\u0014\u0016\u0018\u001a"+
+		"\u001c\u001e \"$&\u0000\u0002\u0002\u0000\u0004\u0004\u0014\u0014\u0001"+
+		"\u0000\u0003\u0004\u0082\u0000(\u0001\u0000\u0000\u0000\u0002/\u0001\u0000"+
+		"\u0000\u0000\u00045\u0001\u0000\u0000\u0000\u0006@\u0001\u0000\u0000\u0000"+
+		"\bB\u0001\u0000\u0000\u0000\nH\u0001\u0000\u0000\u0000\fL\u0001\u0000"+
+		"\u0000\u0000\u000e[\u0001\u0000\u0000\u0000\u0010p\u0001\u0000\u0000\u0000"+
+		"\u0012t\u0001\u0000\u0000\u0000\u0014v\u0001\u0000\u0000\u0000\u0016x"+
+		"\u0001\u0000\u0000\u0000\u0018z\u0001\u0000\u0000\u0000\u001a|\u0001\u0000"+
+		"\u0000\u0000\u001c~\u0001\u0000\u0000\u0000\u001e\u0080\u0001\u0000\u0000"+
+		"\u0000 \u0082\u0001\u0000\u0000\u0000\"\u0084\u0001\u0000\u0000\u0000"+
+		"$\u0086\u0001\u0000\u0000\u0000&\u0088\u0001\u0000\u0000\u0000()\u0003"+
+		"\u0002\u0001\u0000)*\u0005\u0000\u0000\u0001*\u0001\u0001\u0000\u0000"+
+		"\u0000+,\u0003\u0004\u0002\u0000,-\u0003\u0002\u0001\u0000-0\u0001\u0000"+
+		"\u0000\u0000.0\u0001\u0000\u0000\u0000/+\u0001\u0000\u0000\u0000/.\u0001"+
+		"\u0000\u0000\u00000\u0003\u0001\u0000\u0000\u000016\u0003\u0006\u0003"+
+		"\u000026\u0003\b\u0004\u000036\u0003\n\u0005\u000046\u0003\f\u0006\u0000"+
+		"51\u0001\u0000\u0000\u000052\u0001\u0000\u0000\u000053\u0001\u0000\u0000"+
+		"\u000054\u0001\u0000\u0000\u00006\u0005\u0001\u0000\u0000\u000078\u0005"+
+		"\u0012\u0000\u00008A\u0005\u0013\u0000\u00009:\u0005\u0012\u0000\u0000"+
+		":;\u0005\u0001\u0000\u0000;<\u0005\t\u0000\u0000<=\u0003\u0014\n\u0000"+
+		"=>\u0005\n\u0000\u0000>?\u0005\u0013\u0000\u0000?A\u0001\u0000\u0000\u0000"+
+		"@7\u0001\u0000\u0000\u0000@9\u0001\u0000\u0000\u0000A\u0007\u0001\u0000"+
+		"\u0000\u0000BC\u0003\u0010\b\u0000CD\u0003\u0016\u000b\u0000DE\u0005\u000f"+
+		"\u0000\u0000EF\u0005\u0010\u0000\u0000FG\u0005\u0011\u0000\u0000G\t\u0001"+
+		"\u0000\u0000\u0000HI\u0003\u0010\b\u0000IJ\u0003\u0016\u000b\u0000JK\u0003"+
+		"\u000e\u0007\u0000K\u000b\u0001\u0000\u0000\u0000LM\u0005\f\u0000\u0000"+
+		"MN\u0003\u0012\t\u0000NO\u0005\r\u0000\u0000OP\u0005\u000e\u0000\u0000"+
+		"P\r\u0001\u0000\u0000\u0000QR\u0006\u0007\uffff\uffff\u0000RS\u0003$\u0012"+
+		"\u0000ST\u0003\u000e\u0007\u0004T\\\u0001\u0000\u0000\u0000U\\\u0003&"+
+		"\u0013\u0000VW\u0003 \u0010\u0000WX\u0003\u000e\u0007\u0000XY\u0003\""+
+		"\u0011\u0000Y\\\u0001\u0000\u0000\u0000Z\\\u0003\u0010\b\u0000[Q\u0001"+
+		"\u0000\u0000\u0000[U\u0001\u0000\u0000\u0000[V\u0001\u0000\u0000\u0000"+
+		"[Z\u0001\u0000\u0000\u0000\\g\u0001\u0000\u0000\u0000]^\n\u0006\u0000"+
+		"\u0000^_\u0003\u0018\f\u0000_`\u0003\u000e\u0007\u0007`f\u0001\u0000\u0000"+
+		"\u0000ab\n\u0005\u0000\u0000bc\u0003\u001a\r\u0000cd\u0003\u000e\u0007"+
+		"\u0006df\u0001\u0000\u0000\u0000e]\u0001\u0000\u0000\u0000ea\u0001\u0000"+
+		"\u0000\u0000fi\u0001\u0000\u0000\u0000ge\u0001\u0000\u0000\u0000gh\u0001"+
+		"\u0000\u0000\u0000h\u000f\u0001\u0000\u0000\u0000ig\u0001\u0000\u0000"+
+		"\u0000jq\u0005\u0013\u0000\u0000kl\u0005\u0013\u0000\u0000lm\u0003\u001c"+
+		"\u000e\u0000mn\u0003\u000e\u0007\u0000no\u0003\u001e\u000f\u0000oq\u0001"+
+		"\u0000\u0000\u0000pj\u0001\u0000\u0000\u0000pk\u0001\u0000\u0000\u0000"+
+		"q\u0011\u0001\u0000\u0000\u0000ru\u0003\u000e\u0007\u0000su\u0005\u0002"+
+		"\u0000\u0000tr\u0001\u0000\u0000\u0000ts\u0001\u0000\u0000\u0000u\u0013"+
+		"\u0001\u0000\u0000\u0000vw\u0007\u0000\u0000\u0000w\u0015\u0001\u0000"+
+		"\u0000\u0000xy\u0005\u000b\u0000\u0000y\u0017\u0001\u0000\u0000\u0000"+
+		"z{\u0005\u0005\u0000\u0000{\u0019\u0001\u0000\u0000\u0000|}\u0005\u0006"+
+		"\u0000\u0000}\u001b\u0001\u0000\u0000\u0000~\u007f\u0005\u0007\u0000\u0000"+
+		"\u007f\u001d\u0001\u0000\u0000\u0000\u0080\u0081\u0005\b\u0000\u0000\u0081"+
+		"\u001f\u0001\u0000\u0000\u0000\u0082\u0083\u0005\t\u0000\u0000\u0083!"+
+		"\u0001\u0000\u0000\u0000\u0084\u0085\u0005\n\u0000\u0000\u0085#\u0001"+
+		"\u0000\u0000\u0000\u0086\u0087\u0005\u0005\u0000\u0000\u0087%\u0001\u0000"+
+		"\u0000\u0000\u0088\u0089\u0007\u0001\u0000\u0000\u0089\'\u0001\u0000\u0000"+
+		"\u0000\b/5@[egpt";
 	public static final ATN _ATN =
 		new ATNDeserializer().deserialize(_serializedATN.toCharArray());
 	static {
