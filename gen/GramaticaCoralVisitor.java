@@ -46,17 +46,17 @@ public interface GramaticaCoralVisitor<T> extends ParseTreeVisitor<T> {
 	 */
 	T visitSet(GramaticaCoralParser.SetContext ctx);
 	/**
+	 * Visit a parse tree produced by {@link GramaticaCoralParser#output}.
+	 * @param ctx the parse tree
+	 * @return the visitor result
+	 */
+	T visitOutput(GramaticaCoralParser.OutputContext ctx);
+	/**
 	 * Visit a parse tree produced by {@link GramaticaCoralParser#arithexpr}.
 	 * @param ctx the parse tree
 	 * @return the visitor result
 	 */
 	T visitArithexpr(GramaticaCoralParser.ArithexprContext ctx);
-	/**
-	 * Visit a parse tree produced by {@link GramaticaCoralParser#assign}.
-	 * @param ctx the parse tree
-	 * @return the visitor result
-	 */
-	T visitAssign(GramaticaCoralParser.AssignContext ctx);
 	/**
 	 * Visit a parse tree produced by {@link GramaticaCoralParser#sumop}.
 	 * @param ctx the parse tree
@@ -87,6 +87,12 @@ public interface GramaticaCoralVisitor<T> extends ParseTreeVisitor<T> {
 	 * @return the visitor result
 	 */
 	T visitSign(GramaticaCoralParser.SignContext ctx);
+	/**
+	 * Visit a parse tree produced by {@link GramaticaCoralParser#outvalue}.
+	 * @param ctx the parse tree
+	 * @return the visitor result
+	 */
+	T visitOutvalue(GramaticaCoralParser.OutvalueContext ctx);
 	/**
 	 * Visit a parse tree produced by {@link GramaticaCoralParser#number}.
 	 * @param ctx the parse tree

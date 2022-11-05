@@ -1,3 +1,14 @@
-integer x
-float y
-x = y
+integer b
+integer h
+float rectangle_area
+float triangle_area
+
+b = 2.5
+h = 11
+
+rectangle_area = b*h
+triangle_area = rectangle_area/2
+
+Put b to output
+Put "\n-----\n" to output
+Put triangle_area to output

@@ -87,6 +87,18 @@ public class GramaticaCoralBaseListener implements GramaticaCoralListener {
 	 *
 	 * <p>The default implementation does nothing.</p>
 	 */
+	@Override public void enterOutput(GramaticaCoralParser.OutputContext ctx) { }
+	/**
+	 * {@inheritDoc}
+	 *
+	 * <p>The default implementation does nothing.</p>
+	 */
+	@Override public void exitOutput(GramaticaCoralParser.OutputContext ctx) { }
+	/**
+	 * {@inheritDoc}
+	 *
+	 * <p>The default implementation does nothing.</p>
+	 */
 	@Override public void enterArithexpr(GramaticaCoralParser.ArithexprContext ctx) { }
 	/**
 	 * {@inheritDoc}
@@ -94,18 +106,6 @@ public class GramaticaCoralBaseListener implements GramaticaCoralListener {
 	 * <p>The default implementation does nothing.</p>
 	 */
 	@Override public void exitArithexpr(GramaticaCoralParser.ArithexprContext ctx) { }
-	/**
-	 * {@inheritDoc}
-	 *
-	 * <p>The default implementation does nothing.</p>
-	 */
-	@Override public void enterAssign(GramaticaCoralParser.AssignContext ctx) { }
-	/**
-	 * {@inheritDoc}
-	 *
-	 * <p>The default implementation does nothing.</p>
-	 */
-	@Override public void exitAssign(GramaticaCoralParser.AssignContext ctx) { }
 	/**
 	 * {@inheritDoc}
 	 *
@@ -166,6 +166,18 @@ public class GramaticaCoralBaseListener implements GramaticaCoralListener {
 	 * <p>The default implementation does nothing.</p>
 	 */
 	@Override public void exitSign(GramaticaCoralParser.SignContext ctx) { }
+	/**
+	 * {@inheritDoc}
+	 *
+	 * <p>The default implementation does nothing.</p>
+	 */
+	@Override public void enterOutvalue(GramaticaCoralParser.OutvalueContext ctx) { }
+	/**
+	 * {@inheritDoc}
+	 *
+	 * <p>The default implementation does nothing.</p>
+	 */
+	@Override public void exitOutvalue(GramaticaCoralParser.OutvalueContext ctx) { }
 	/**
 	 * {@inheritDoc}
 	 *
