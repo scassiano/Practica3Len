@@ -4,7 +4,7 @@ init: commands EOF;
 
 commands: command commands | ;
 
-command : declaration | input | set | output | comment;
+command : declaration | input | set | output | comment | seedrandomnumbers;
 
 declaration : TYPE IDENTIFIER
 | TYPE ARRAY PIZQ size PDER IDENTIFIER;
@@ -30,6 +30,8 @@ arithexpr : arithexpr sumop arithexpr
 //PENDIENTE PERMITIR ARREGLOS EN VARIABLES
 variable: IDENTIFIER | IDENTIFIER cizq arithexpr cder | IDENTIFIER DOT RSIZE;
 
+seedrandomnumbers : SEEDRANDOMNUMBERS PIZQ arithexpr PDER;
+
 outvalue: arithexpr | STRING;
 
 size: QUESTIONMARK | INTNUM;
@@ -49,6 +51,7 @@ number : INTNUM
 ;
 
 // parser rules start with lowercase letters, lexer rules with uppercase
+SEEDRANDOMNUMBERS : 'SeedRandomNumbers';
 ARRAY : 'array';
 STRING: ["].*?["];
 FLOATNUM : [0-9]+([.][0-9]+);

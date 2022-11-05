@@ -135,6 +135,18 @@ public class GramaticaCoralBaseListener implements GramaticaCoralListener {
 	 *
 	 * <p>The default implementation does nothing.</p>
 	 */
+	@Override public void enterSeedrandomnumbers(GramaticaCoralParser.SeedrandomnumbersContext ctx) { }
+	/**
+	 * {@inheritDoc}
+	 *
+	 * <p>The default implementation does nothing.</p>
+	 */
+	@Override public void exitSeedrandomnumbers(GramaticaCoralParser.SeedrandomnumbersContext ctx) { }
+	/**
+	 * {@inheritDoc}
+	 *
+	 * <p>The default implementation does nothing.</p>
+	 */
 	@Override public void enterOutvalue(GramaticaCoralParser.OutvalueContext ctx) { }
 	/**
 	 * {@inheritDoc}

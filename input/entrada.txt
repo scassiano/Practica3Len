@@ -1,5 +1,7 @@
 // Arreglos en CORAL
 
+SeedRandomNumbers(3+4+++++7)
+
 integer array(?) userNums
 float array(5) userVals
 

@@ -107,6 +107,16 @@ public interface GramaticaCoralListener extends ParseTreeListener {
 	 */
 	void exitVariable(GramaticaCoralParser.VariableContext ctx);
 	/**
+	 * Enter a parse tree produced by {@link GramaticaCoralParser#seedrandomnumbers}.
+	 * @param ctx the parse tree
+	 */
+	void enterSeedrandomnumbers(GramaticaCoralParser.SeedrandomnumbersContext ctx);
+	/**
+	 * Exit a parse tree produced by {@link GramaticaCoralParser#seedrandomnumbers}.
+	 * @param ctx the parse tree
+	 */
+	void exitSeedrandomnumbers(GramaticaCoralParser.SeedrandomnumbersContext ctx);
+	/**
 	 * Enter a parse tree produced by {@link GramaticaCoralParser#outvalue}.
 	 * @param ctx the parse tree
 	 */

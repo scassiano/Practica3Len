@@ -126,6 +126,18 @@ public class Traduccion extends GramaticaCoralBaseListener {
         //Comentario ya tiene salto de linea, por eso sin ln
         System.out.print("#"+comentario);
     }
+
+    @Override
+    public void enterSeedrandomnumbers(GramaticaCoralParser.SeedrandomnumbersContext ctx){
+        //Imprimir primera parte para asignar la seed
+        System.out.print("random.seed(");
+    }
+
+    @Override
+    public void exitSeedrandomnumbers(GramaticaCoralParser.SeedrandomnumbersContext ctx){
+        //Imprimir el parentesis para cerrar el metodo seed
+        System.out.println(")");
+    }
     @Override
     public void enterSign(GramaticaCoralParser.SignContext ctx) {
         System.out.print(ctx.SUMOP().getText());
