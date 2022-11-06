@@ -87,6 +87,16 @@ public interface GramaticaCoralListener extends ParseTreeListener {
 	 */
 	void exitComment(GramaticaCoralParser.CommentContext ctx);
 	/**
+	 * Enter a parse tree produced by {@link GramaticaCoralParser#condexpr}.
+	 * @param ctx the parse tree
+	 */
+	void enterCondexpr(GramaticaCoralParser.CondexprContext ctx);
+	/**
+	 * Exit a parse tree produced by {@link GramaticaCoralParser#condexpr}.
+	 * @param ctx the parse tree
+	 */
+	void exitCondexpr(GramaticaCoralParser.CondexprContext ctx);
+	/**
 	 * Enter a parse tree produced by {@link GramaticaCoralParser#arithexpr}.
 	 * @param ctx the parse tree
 	 */
@@ -166,6 +176,46 @@ public interface GramaticaCoralListener extends ParseTreeListener {
 	 * @param ctx the parse tree
 	 */
 	void exitSize(GramaticaCoralParser.SizeContext ctx);
+	/**
+	 * Enter a parse tree produced by {@link GramaticaCoralParser#not}.
+	 * @param ctx the parse tree
+	 */
+	void enterNot(GramaticaCoralParser.NotContext ctx);
+	/**
+	 * Exit a parse tree produced by {@link GramaticaCoralParser#not}.
+	 * @param ctx the parse tree
+	 */
+	void exitNot(GramaticaCoralParser.NotContext ctx);
+	/**
+	 * Enter a parse tree produced by {@link GramaticaCoralParser#or}.
+	 * @param ctx the parse tree
+	 */
+	void enterOr(GramaticaCoralParser.OrContext ctx);
+	/**
+	 * Exit a parse tree produced by {@link GramaticaCoralParser#or}.
+	 * @param ctx the parse tree
+	 */
+	void exitOr(GramaticaCoralParser.OrContext ctx);
+	/**
+	 * Enter a parse tree produced by {@link GramaticaCoralParser#and}.
+	 * @param ctx the parse tree
+	 */
+	void enterAnd(GramaticaCoralParser.AndContext ctx);
+	/**
+	 * Exit a parse tree produced by {@link GramaticaCoralParser#and}.
+	 * @param ctx the parse tree
+	 */
+	void exitAnd(GramaticaCoralParser.AndContext ctx);
+	/**
+	 * Enter a parse tree produced by {@link GramaticaCoralParser#oprel}.
+	 * @param ctx the parse tree
+	 */
+	void enterOprel(GramaticaCoralParser.OprelContext ctx);
+	/**
+	 * Exit a parse tree produced by {@link GramaticaCoralParser#oprel}.
+	 * @param ctx the parse tree
+	 */
+	void exitOprel(GramaticaCoralParser.OprelContext ctx);
 	/**
 	 * Enter a parse tree produced by {@link GramaticaCoralParser#with}.
 	 * @param ctx the parse tree

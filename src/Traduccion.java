@@ -236,6 +236,29 @@ public class Traduccion extends GramaticaCoralBaseListener {
     public void enterComa(GramaticaCoralParser.ComaContext ctx) {
         System.out.print(",");
     }
+
+    @Override
+    public void enterNot(GramaticaCoralParser.NotContext ctx){
+        System.out.print("not");
+    }
+
+    @Override
+    public void enterOr(GramaticaCoralParser.OrContext ctx){
+        //Se ponen espacios alrededor del or
+        System.out.print(" or ");
+    }
+
+    @Override
+    public void enterAnd(GramaticaCoralParser.AndContext ctx){
+        //Se ponen espacios alrededor de and
+        System.out.print(" and ");
+    }
+
+    @Override
+    public void enterOprel(GramaticaCoralParser.OprelContext ctx){
+        System.out.print(ctx.OPREL().getText());
+    }
+
     @Override
     public void enterAssign(GramaticaCoralParser.AssignContext ctx){
         // Imprimir un signo igual

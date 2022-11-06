@@ -58,6 +58,12 @@ public interface GramaticaCoralVisitor<T> extends ParseTreeVisitor<T> {
 	 */
 	T visitComment(GramaticaCoralParser.CommentContext ctx);
 	/**
+	 * Visit a parse tree produced by {@link GramaticaCoralParser#condexpr}.
+	 * @param ctx the parse tree
+	 * @return the visitor result
+	 */
+	T visitCondexpr(GramaticaCoralParser.CondexprContext ctx);
+	/**
 	 * Visit a parse tree produced by {@link GramaticaCoralParser#arithexpr}.
 	 * @param ctx the parse tree
 	 * @return the visitor result
@@ -105,6 +111,30 @@ public interface GramaticaCoralVisitor<T> extends ParseTreeVisitor<T> {
 	 * @return the visitor result
 	 */
 	T visitSize(GramaticaCoralParser.SizeContext ctx);
+	/**
+	 * Visit a parse tree produced by {@link GramaticaCoralParser#not}.
+	 * @param ctx the parse tree
+	 * @return the visitor result
+	 */
+	T visitNot(GramaticaCoralParser.NotContext ctx);
+	/**
+	 * Visit a parse tree produced by {@link GramaticaCoralParser#or}.
+	 * @param ctx the parse tree
+	 * @return the visitor result
+	 */
+	T visitOr(GramaticaCoralParser.OrContext ctx);
+	/**
+	 * Visit a parse tree produced by {@link GramaticaCoralParser#and}.
+	 * @param ctx the parse tree
+	 * @return the visitor result
+	 */
+	T visitAnd(GramaticaCoralParser.AndContext ctx);
+	/**
+	 * Visit a parse tree produced by {@link GramaticaCoralParser#oprel}.
+	 * @param ctx the parse tree
+	 * @return the visitor result
+	 */
+	T visitOprel(GramaticaCoralParser.OprelContext ctx);
 	/**
 	 * Visit a parse tree produced by {@link GramaticaCoralParser#with}.
 	 * @param ctx the parse tree

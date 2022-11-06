@@ -1,0 +1,8 @@
+integer check
+integer my_min
+float result
+
+check = 3
+my_min = 2
+
+(check == (3-4-(-1))) and not (check < (2*min(+my_min,var1+var2))%2 or check > 0/-2)

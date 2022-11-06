@@ -5,7 +5,7 @@ init: commands EOF;
 commands: command commands | ;
 
 //Se pone directamente callfunction ya que en los test se aseguran entradas validas
-command : declaration | input | set | output | comment | seedrandomnumbers | callfunction;
+command : declaration | input | set | output | comment | seedrandomnumbers | callfunction | condexpr;
 
 declaration : TYPE IDENTIFIER
 | TYPE ARRAY PIZQ size PDER IDENTIFIER;
@@ -18,7 +18,13 @@ output : PUT outvalue TO OUTPUT (with arithexpr DECIMAL PLACES | );
 
 comment : COMMENT;
 
-//PENDIENTE AGREGAR FUNCIONES COMO TERMINOS DE OPERACIONES
+//Expresiones aritmeticas y condicionales se imprime cada parte sola
+condexpr : not pizq condexpr pder
+| pizq condexpr pder
+| condexpr or condexpr
+| condexpr and condexpr
+| arithexpr oprel arithexpr;
+
 arithexpr : arithexpr sumop arithexpr
 | arithexpr mulop arithexpr
 | sign arithexpr
@@ -35,7 +41,6 @@ callfunction: SQUAREROOT PIZQ arithexpr PDER
 | RANDOMNUMBER PIZQ arithexpr coma arithexpr PDER
 | IDENTIFIER PIZQ arguments PDER;
 
-//PENDIENTE PERMITIR ARREGLOS EN VARIABLES
 variable: IDENTIFIER | IDENTIFIER cizq arithexpr cder | IDENTIFIER DOT RSIZE;
 
 arguments : arithexpr argumentsprima | ;
@@ -49,6 +54,10 @@ outvalue: arithexpr | STRING;
 
 size: QUESTIONMARK | INTNUM;
 
+not : NOT;
+or : OR;
+and : AND;
+oprel : OPREL;
 with: WITH;
 coma: COMA;
 assign : ASSIGN;
@@ -66,6 +75,9 @@ number : INTNUM
 ;
 
 // parser rules start with lowercase letters, lexer rules with uppercase
+AND: 'and';
+OR: 'or';
+NOT : 'not';
 WITH : 'with';
 DECIMAL : 'decimal';
 PLACES : 'places';
@@ -79,6 +91,7 @@ ARRAY : 'array';
 STRING: ["].*?["];
 FLOATNUM : [0-9]+([.][0-9]+);
 INTNUM : [0-9]+;
+OPREL : ('==' | '<=' | '<' | '>=' | '>' | '!=');
 SUMOP  : ('+' | '-') ;
 MULOP  : ( '*' | '/' | '%');
 CIZQ : '[';
