@@ -5,7 +5,7 @@ init: commands EOF;
 commands: command commands | ;
 
 //Se pone directamente callfunction ya que en los test se aseguran entradas validas
-command : declaration | input | set | output | comment | seedrandomnumbers | callfunction | condexpr;
+command : declaration | input | set | output | comment | seedrandomnumbers | callfunction;
 
 declaration : TYPE IDENTIFIER
 | TYPE ARRAY PIZQ size PDER IDENTIFIER;
