@@ -1,6 +1,9 @@
 integer check
 integer my_min
+integer x
 float result
 
-check = 3
-my_min = 2
+if check>3
+   x = 18
+
+x = 23

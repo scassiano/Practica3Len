@@ -28,6 +28,12 @@ public interface GramaticaCoralVisitor<T> extends ParseTreeVisitor<T> {
 	 */
 	T visitCommand(GramaticaCoralParser.CommandContext ctx);
 	/**
+	 * Visit a parse tree produced by {@link GramaticaCoralParser#if}.
+	 * @param ctx the parse tree
+	 * @return the visitor result
+	 */
+	T visitIf(GramaticaCoralParser.IfContext ctx);
+	/**
 	 * Visit a parse tree produced by {@link GramaticaCoralParser#declaration}.
 	 * @param ctx the parse tree
 	 * @return the visitor result

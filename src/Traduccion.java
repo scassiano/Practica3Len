@@ -10,6 +10,9 @@ public class Traduccion extends GramaticaCoralBaseListener {
     //Saber si se esta haciendo una asignacion del size de un arreglo
     Boolean sizeAssign = new Boolean(false);
 
+    //Cantidad de espacios de indentacion
+    Integer indentSpaces = new Integer(0);
+
 
     @Override
     public void enterInit(GramaticaCoralParser.InitContext ctx) {
@@ -17,6 +20,40 @@ public class Traduccion extends GramaticaCoralBaseListener {
         System.out.println("import math");
         System.out.println("import random");
     }
+
+    @Override
+    public void enterCommand(GramaticaCoralParser.CommandContext ctx){
+        //Imprimir espacios al inicio de un comando segun indentacion
+        for (int i = 0; i < indentSpaces; i++) {
+            System.out.print(" ");
+        }
+    }
+
+    @Override
+    public void enterIf(GramaticaCoralParser.IfContext ctx){
+        //Imprimir palabra if con un espacio
+        System.out.print("if ");
+        //Aumentar los espacios de indentacion
+        indentSpaces = indentSpaces + 3;
+    }
+
+    @Override
+    public void exitIf(GramaticaCoralParser.IfContext ctx){
+        //Imprimir una salto de linea
+        System.out.println();
+        //Quitar los espacios de intentacion
+        indentSpaces = indentSpaces - 3;
+    }
+
+    @Override
+    public void exitCondexpr(GramaticaCoralParser.CondexprContext ctx){
+        //Verificar si el padre es una regla if
+        if(ctx.getParent() instanceof GramaticaCoralParser.IfContext){
+            //Imprimir : al final de la sentencia y una nueva linea
+            System.out.println(":");
+        }
+    }
+
 
     @Override
     public void enterDeclaration(GramaticaCoralParser.DeclarationContext ctx) {

@@ -2,10 +2,14 @@ grammar GramaticaCoral;
 
 init: commands EOF;
 
-commands: command commands | ;
+commands: command commands| ;
 
 //Se pone directamente callfunction ya que en los test se aseguran entradas validas
-command : declaration | input | set | output | comment | seedrandomnumbers | callfunction;
+command :  newlinespaces (declaration|input|set|output|comment|seedrandomnumbers|callfunction|if);
+
+if : IF condexpr commands;
+//elseif : ELSEIF condexpr;
+//else : ELSE;
 
 declaration : TYPE IDENTIFIER
 | TYPE ARRAY PIZQ size PDER IDENTIFIER;
@@ -47,12 +51,13 @@ arguments : arithexpr argumentsprima | ;
 
 argumentsprima : coma arithexpr argumentsprima | ;
 
-
 seedrandomnumbers : SEEDRANDOMNUMBERS PIZQ arithexpr PDER;
 
 outvalue: arithexpr | STRING;
 
 size: QUESTIONMARK | INTNUM;
+
+newlinespaces : NEWLINESPACES | ;
 
 not : NOT;
 or : OR;
@@ -74,7 +79,12 @@ number : INTNUM
 | FLOATNUM
 ;
 
+
+
 // parser rules start with lowercase letters, lexer rules with uppercase
+IF : 'if';
+ELSEIF : 'elseif';
+ELSE : 'else';
 AND: 'and';
 OR: 'or';
 NOT : 'not';
@@ -111,4 +121,5 @@ TYPE : ('integer' | 'float');
 IDENTIFIER : [a-zA-Z][a-zA-Z0-9_]* ;
 QUESTIONMARK : '?';
 COMMENT : '//'.*?[\n];
+NEWLINESPACES : ([\n][ ]+)+;
 WS: [ \t\r\n]+ -> skip; // Define whitespace rule
