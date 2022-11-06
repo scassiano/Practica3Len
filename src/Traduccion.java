@@ -126,7 +126,16 @@ public class Traduccion extends GramaticaCoralBaseListener {
         if (ctx.number() != null) {
             System.out.print(ctx.number().getText());
         } else if (ctx.variable() != null) {
-            System.out.print(ctx.variable().getText());
+            //Verificar si es una variable normal o el size de un arreglo
+            if(ctx.variable().RSIZE() != null){
+                //Usar la longitud de un arreglo
+                System.out.print("len(");
+                System.out.print(ctx.variable().IDENTIFIER().getText());
+                System.out.print(")");
+            } else {
+                //Si es una variable o posicion de un arreglo
+                System.out.print(ctx.variable().getText());
+            }
         }
     }
 
