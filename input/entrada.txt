@@ -1,12 +1,5 @@
 integer x
-   //comentario
-   x=3
-   x=56/x
-      x=4
-      //comentario2
-      x=555
-      //conmentario3
-      //comentario4
-   //comentario 5
-float y
-//comentfinal
+if x>2
+  //Hoy quiero hacer otro if
+  if x>3
+     Put "Tamarindo seco" to output

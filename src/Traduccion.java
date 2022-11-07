@@ -36,7 +36,7 @@ public class Traduccion extends GramaticaCoralBaseListener {
     }
 
     @Override
-    public void exitCommand(GramaticaCoralParser.CommandContext ctx){
+    public void exitComment(GramaticaCoralParser.CommentContext ctx){
         System.out.println("");
 
     }
@@ -63,7 +63,7 @@ public class Traduccion extends GramaticaCoralBaseListener {
         //Verificar si el padre es una regla if
         if(ctx.getParent() instanceof GramaticaCoralParser.IfContext){
             //Imprimir : al final de la sentencia y una nueva linea
-            System.out.println(":");
+            System.out.print(":");
         }
     }
 
