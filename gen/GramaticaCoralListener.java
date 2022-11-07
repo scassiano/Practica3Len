@@ -187,6 +187,16 @@ public interface GramaticaCoralListener extends ParseTreeListener {
 	 */
 	void exitSize(GramaticaCoralParser.SizeContext ctx);
 	/**
+	 * Enter a parse tree produced by {@link GramaticaCoralParser#newlinespaces}.
+	 * @param ctx the parse tree
+	 */
+	void enterNewlinespaces(GramaticaCoralParser.NewlinespacesContext ctx);
+	/**
+	 * Exit a parse tree produced by {@link GramaticaCoralParser#newlinespaces}.
+	 * @param ctx the parse tree
+	 */
+	void exitNewlinespaces(GramaticaCoralParser.NewlinespacesContext ctx);
+	/**
 	 * Enter a parse tree produced by {@link GramaticaCoralParser#not}.
 	 * @param ctx the parse tree
 	 */

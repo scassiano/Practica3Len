@@ -1,9 +1,4 @@
 integer check
-integer my_min
-integer x
-float result
+   check=2
 
-if check>3
-   x = 18
-
-x = 23
+   integer y

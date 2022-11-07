@@ -7,7 +7,7 @@ commands: command commands| ;
 //Se pone directamente callfunction ya que en los test se aseguran entradas validas
 command :  newlinespaces (declaration|input|set|output|comment|seedrandomnumbers|callfunction|if);
 
-if : IF condexpr commands;
+if : IF condexpr;
 //elseif : ELSEIF condexpr;
 //else : ELSE;
 
@@ -57,7 +57,7 @@ outvalue: arithexpr | STRING;
 
 size: QUESTIONMARK | INTNUM;
 
-newlinespaces : NEWLINESPACES | ;
+newlinespaces:NEWLINESPACES| ;
 
 not : NOT;
 or : OR;
@@ -121,5 +121,6 @@ TYPE : ('integer' | 'float');
 IDENTIFIER : [a-zA-Z][a-zA-Z0-9_]* ;
 QUESTIONMARK : '?';
 COMMENT : '//'.*?[\n];
-NEWLINESPACES : ([\n][ ]+)+;
+NEWLINESPACES : ([\n][\r]|[\n][ ]*)*([\n]([ ])+)+;
+NEWLINESPACESEOF : ([\n][\r]|[\n][ ]*)*([\n]([ ])+)+ EOF -> skip;
 WS: [ \t\r\n]+ -> skip; // Define whitespace rule

@@ -231,6 +231,18 @@ public class GramaticaCoralBaseListener implements GramaticaCoralListener {
 	 *
 	 * <p>The default implementation does nothing.</p>
 	 */
+	@Override public void enterNewlinespaces(GramaticaCoralParser.NewlinespacesContext ctx) { }
+	/**
+	 * {@inheritDoc}
+	 *
+	 * <p>The default implementation does nothing.</p>
+	 */
+	@Override public void exitNewlinespaces(GramaticaCoralParser.NewlinespacesContext ctx) { }
+	/**
+	 * {@inheritDoc}
+	 *
+	 * <p>The default implementation does nothing.</p>
+	 */
 	@Override public void enterNot(GramaticaCoralParser.NotContext ctx) { }
 	/**
 	 * {@inheritDoc}
