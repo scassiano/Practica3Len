@@ -20,7 +20,7 @@ public class Traduccion extends GramaticaCoralBaseListener {
 
     @Override
     public void enterCommand(GramaticaCoralParser.CommandContext ctx){
-        System.out.print(ctx.newlinespaces().getStart());
+        //System.out.print(ctx.newlinespaces().getStart());
         //Verificar si el comando tiene indentacion
         if(ctx.newlinespaces().NEWLINESPACES() != null){
             //Si tiene indentacion recorriendo hacia atras la cadena

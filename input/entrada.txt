@@ -1,4 +1,3 @@
 integer check
    check=2
-
    integer y
