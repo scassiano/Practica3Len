@@ -121,6 +121,6 @@ TYPE : ('integer' | 'float');
 IDENTIFIER : [a-zA-Z][a-zA-Z0-9_]* ;
 QUESTIONMARK : '?';
 COMMENT : '//'.*?[\n];
-NEWLINESPACES : (([\r][\n]|[\n])[\r]|([\r][\n]|[\n])[ ]*)*(([\r][\n]|[\n])([ ])+)+;
-NEWLINESPACESEOF : (([\r][\n]|[\n])[\r]|([\r][\n]|[\n])[ ]*)*(([\r][\n]|[\n])([ ])+)+ EOF -> skip;
+NEWLINESPACES : (([\r][\n]|[\n])[\r]|([\r][\n]|[\n])[ ]*)*(([\r][\n]|[\n])([ ])+)+; //Lee fin de linea LF y CRLF
+NEWLINESPACESEOF : (([\r][\n]|[\n])[\r]|([\r][\n]|[\n])[ ]*)*(([\r][\n]|[\n])([ ])+)+ EOF -> skip; //Lee fin de linea LF y CRLF
 WS: [ \t\r\n]+ -> skip; // Define whitespace rule
