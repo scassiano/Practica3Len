@@ -73,10 +73,28 @@ public class Traduccion extends GramaticaCoralBaseListener {
     @Override
     public void exitCondexpr(GramaticaCoralParser.CondexprContext ctx){
         //Verificar si el padre es una regla if o una regla elseif
-        if(ctx.getParent() instanceof GramaticaCoralParser.IfContext || ctx.getParent() instanceof GramaticaCoralParser.ElseifContext){
+        if(ctx.getParent() instanceof GramaticaCoralParser.IfContext || ctx.getParent() instanceof GramaticaCoralParser.ElseifContext || ctx.getParent() instanceof GramaticaCoralParser.WhileContext){
             //Imprimir : al final de la sentencia y una nueva linea
             System.out.print(":");
         }
+    }
+
+    @Override
+    public void enterElse(GramaticaCoralParser.ElseContext ctx){
+        //Imprimir else: y un salto de linea
+        System.out.println("else:");
+    }
+
+    @Override
+    public void enterWhile(GramaticaCoralParser.WhileContext ctx){
+        //Imprimir while con un espacio
+        System.out.print("while ");
+    }
+
+    @Override
+    public void exitWhile(GramaticaCoralParser.WhileContext ctx){
+        //Imprimir un salto de linea
+        System.out.println();
     }
 
 

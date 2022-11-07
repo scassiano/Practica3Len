@@ -1,6 +1,7 @@
 integer x
-if x>2
-   //Hoy quiero hacer otro if
-   x=3
-elseif x>3
-   Put "Tamarindo seco" to output
+integer y
+x = 5
+y = 2
+while x>y
+   Put "x es mayor que y\n" to output
+   x = x-1

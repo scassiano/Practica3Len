@@ -8,11 +8,12 @@ commands: command commands| ;
 
 //Se pone directamente callfunction ya que en los test se aseguran entradas validas
 //Se pone directamente if, elseif, else ya que los test se aseguran entradas validas
-command :  newlinespaces (declaration|input|set|output|comment|seedrandomnumbers|callfunction|if|elseif);
+command :  newlinespaces (declaration|input|set|output|comment|seedrandomnumbers|callfunction|if|elseif|else|while);
 
-if : IF condexpr;
-elseif : ELSEIF condexpr;
-//else : ELSE;
+if: IF condexpr;
+elseif: ELSEIF condexpr;
+else: ELSE;
+while: WHILE condexpr;
 
 declaration : TYPE IDENTIFIER
 | TYPE ARRAY PIZQ size PDER IDENTIFIER;
@@ -85,6 +86,7 @@ number : INTNUM
 
 
 // parser rules start with lowercase letters, lexer rules with uppercase
+WHILE: 'while';
 IF : 'if';
 ELSEIF : 'elseif';
 ELSE : 'else';
