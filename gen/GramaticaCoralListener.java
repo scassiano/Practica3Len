@@ -77,6 +77,16 @@ public interface GramaticaCoralListener extends ParseTreeListener {
 	 */
 	void exitWhile(GramaticaCoralParser.WhileContext ctx);
 	/**
+	 * Enter a parse tree produced by {@link GramaticaCoralParser#forsentence}.
+	 * @param ctx the parse tree
+	 */
+	void enterForsentence(GramaticaCoralParser.ForsentenceContext ctx);
+	/**
+	 * Exit a parse tree produced by {@link GramaticaCoralParser#forsentence}.
+	 * @param ctx the parse tree
+	 */
+	void exitForsentence(GramaticaCoralParser.ForsentenceContext ctx);
+	/**
 	 * Enter a parse tree produced by {@link GramaticaCoralParser#declaration}.
 	 * @param ctx the parse tree
 	 */
@@ -106,6 +116,26 @@ public interface GramaticaCoralListener extends ParseTreeListener {
 	 * @param ctx the parse tree
 	 */
 	void exitSet(GramaticaCoralParser.SetContext ctx);
+	/**
+	 * Enter a parse tree produced by {@link GramaticaCoralParser#setfor1}.
+	 * @param ctx the parse tree
+	 */
+	void enterSetfor1(GramaticaCoralParser.Setfor1Context ctx);
+	/**
+	 * Exit a parse tree produced by {@link GramaticaCoralParser#setfor1}.
+	 * @param ctx the parse tree
+	 */
+	void exitSetfor1(GramaticaCoralParser.Setfor1Context ctx);
+	/**
+	 * Enter a parse tree produced by {@link GramaticaCoralParser#setfor2}.
+	 * @param ctx the parse tree
+	 */
+	void enterSetfor2(GramaticaCoralParser.Setfor2Context ctx);
+	/**
+	 * Exit a parse tree produced by {@link GramaticaCoralParser#setfor2}.
+	 * @param ctx the parse tree
+	 */
+	void exitSetfor2(GramaticaCoralParser.Setfor2Context ctx);
 	/**
 	 * Enter a parse tree produced by {@link GramaticaCoralParser#output}.
 	 * @param ctx the parse tree
@@ -226,6 +256,26 @@ public interface GramaticaCoralListener extends ParseTreeListener {
 	 * @param ctx the parse tree
 	 */
 	void exitNewlinespaces(GramaticaCoralParser.NewlinespacesContext ctx);
+	/**
+	 * Enter a parse tree produced by {@link GramaticaCoralParser#semicolonfor1}.
+	 * @param ctx the parse tree
+	 */
+	void enterSemicolonfor1(GramaticaCoralParser.Semicolonfor1Context ctx);
+	/**
+	 * Exit a parse tree produced by {@link GramaticaCoralParser#semicolonfor1}.
+	 * @param ctx the parse tree
+	 */
+	void exitSemicolonfor1(GramaticaCoralParser.Semicolonfor1Context ctx);
+	/**
+	 * Enter a parse tree produced by {@link GramaticaCoralParser#semicolonfor2}.
+	 * @param ctx the parse tree
+	 */
+	void enterSemicolonfor2(GramaticaCoralParser.Semicolonfor2Context ctx);
+	/**
+	 * Exit a parse tree produced by {@link GramaticaCoralParser#semicolonfor2}.
+	 * @param ctx the parse tree
+	 */
+	void exitSemicolonfor2(GramaticaCoralParser.Semicolonfor2Context ctx);
 	/**
 	 * Enter a parse tree produced by {@link GramaticaCoralParser#not}.
 	 * @param ctx the parse tree

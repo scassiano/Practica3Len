@@ -52,6 +52,12 @@ public interface GramaticaCoralVisitor<T> extends ParseTreeVisitor<T> {
 	 */
 	T visitWhile(GramaticaCoralParser.WhileContext ctx);
 	/**
+	 * Visit a parse tree produced by {@link GramaticaCoralParser#forsentence}.
+	 * @param ctx the parse tree
+	 * @return the visitor result
+	 */
+	T visitForsentence(GramaticaCoralParser.ForsentenceContext ctx);
+	/**
 	 * Visit a parse tree produced by {@link GramaticaCoralParser#declaration}.
 	 * @param ctx the parse tree
 	 * @return the visitor result
@@ -69,6 +75,18 @@ public interface GramaticaCoralVisitor<T> extends ParseTreeVisitor<T> {
 	 * @return the visitor result
 	 */
 	T visitSet(GramaticaCoralParser.SetContext ctx);
+	/**
+	 * Visit a parse tree produced by {@link GramaticaCoralParser#setfor1}.
+	 * @param ctx the parse tree
+	 * @return the visitor result
+	 */
+	T visitSetfor1(GramaticaCoralParser.Setfor1Context ctx);
+	/**
+	 * Visit a parse tree produced by {@link GramaticaCoralParser#setfor2}.
+	 * @param ctx the parse tree
+	 * @return the visitor result
+	 */
+	T visitSetfor2(GramaticaCoralParser.Setfor2Context ctx);
 	/**
 	 * Visit a parse tree produced by {@link GramaticaCoralParser#output}.
 	 * @param ctx the parse tree
@@ -141,6 +159,18 @@ public interface GramaticaCoralVisitor<T> extends ParseTreeVisitor<T> {
 	 * @return the visitor result
 	 */
 	T visitNewlinespaces(GramaticaCoralParser.NewlinespacesContext ctx);
+	/**
+	 * Visit a parse tree produced by {@link GramaticaCoralParser#semicolonfor1}.
+	 * @param ctx the parse tree
+	 * @return the visitor result
+	 */
+	T visitSemicolonfor1(GramaticaCoralParser.Semicolonfor1Context ctx);
+	/**
+	 * Visit a parse tree produced by {@link GramaticaCoralParser#semicolonfor2}.
+	 * @param ctx the parse tree
+	 * @return the visitor result
+	 */
+	T visitSemicolonfor2(GramaticaCoralParser.Semicolonfor2Context ctx);
 	/**
 	 * Visit a parse tree produced by {@link GramaticaCoralParser#not}.
 	 * @param ctx the parse tree

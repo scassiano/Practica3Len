@@ -8,12 +8,13 @@ commands: command commands| ;
 
 //Se pone directamente callfunction ya que en los test se aseguran entradas validas
 //Se pone directamente if, elseif, else ya que los test se aseguran entradas validas
-command :  newlinespaces (declaration|input|set|output|comment|seedrandomnumbers|callfunction|if|elseif|else|while);
+command :  newlinespaces (declaration|input|set|output|comment|seedrandomnumbers|callfunction|if|elseif|else|while|forsentence);
 
 if: IF condexpr;
 elseif: ELSEIF condexpr;
 else: ELSE;
 while: WHILE condexpr;
+forsentence: FOR setfor1 semicolonfor1 condexpr semicolonfor2 setfor2;
 
 declaration : TYPE IDENTIFIER
 | TYPE ARRAY PIZQ size PDER IDENTIFIER;
@@ -21,7 +22,8 @@ declaration : TYPE IDENTIFIER
 input : variable assign GET NEXT INPUT;
 
 set: variable assign arithexpr;
-
+setfor1: set;
+setfor2: set;
 output : PUT outvalue TO OUTPUT (with arithexpr DECIMAL PLACES | );
 
 comment : COMMENT;
@@ -63,6 +65,8 @@ size: QUESTIONMARK | INTNUM;
 
 newlinespaces:NEWLINESPACES| ;
 
+semicolonfor1: SEMICOLON;
+semicolonfor2: SEMICOLON;
 not : NOT;
 or : OR;
 and : AND;
@@ -86,6 +90,8 @@ number : INTNUM
 
 
 // parser rules start with lowercase letters, lexer rules with uppercase
+FOR: 'for';
+SEMICOLON: ';';
 WHILE: 'while';
 IF : 'if';
 ELSEIF : 'elseif';

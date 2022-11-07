@@ -10,6 +10,9 @@ public class Traduccion extends GramaticaCoralBaseListener {
     //Saber si se esta haciendo una asignacion del size de un arreglo
     Boolean sizeAssign = new Boolean(false);
 
+    //Variable para conocer indentacion de un for
+    Integer indentationFor = new Integer(0);
+
 
     @Override
     public void enterInit(GramaticaCoralParser.InitContext ctx) {
@@ -20,7 +23,9 @@ public class Traduccion extends GramaticaCoralBaseListener {
 
     @Override
     public void enterCommand(GramaticaCoralParser.CommandContext ctx){
-        //System.out.print(ctx.newlinespaces().getStart());
+        //Se reinicia contador para indentaciones de un for
+        indentationFor = 0;
+
         //Verificar si el comando tiene indentacion
         if(ctx.newlinespaces().NEWLINESPACES() != null){
             //Si tiene indentacion recorriendo hacia atras la cadena
@@ -28,6 +33,11 @@ public class Traduccion extends GramaticaCoralBaseListener {
                 if(ctx.newlinespaces().NEWLINESPACES().getText().charAt(i) == '\n'){
                     break;
                 } else {
+                    //Aumentar contador de indentaciones si se cuenta un for
+                    if(ctx.forsentence() != null){
+                        //Se van a contar indentaciones de un for
+                        indentationFor = indentationFor + 1;
+                    }
                     //Imprimir un espacio
                     System.out.print(" ");
                 }
@@ -97,6 +107,88 @@ public class Traduccion extends GramaticaCoralBaseListener {
         System.out.println();
     }
 
+    @Override
+    public void enterForsentence(GramaticaCoralParser.ForsentenceContext ctx){
+        //La indentacion ya se imprimio previamente
+        //Imprimir un boolean para controlar ejecucion del for
+        System.out.println("_booleanFor =  False");
+        //Imprimir indentacion antes de sentencia de asignacion del for
+        for (int i = 0; i < indentationFor; i++) {
+            System.out.print(" ");
+        }
+        // La sentencia de asignacion del for se imprime sola
+    }
+
+    @Override
+    public void enterSemicolonfor1(GramaticaCoralParser.Semicolonfor1Context ctx){
+        //Imprimir while con indentacion al nivel del for que va a simular
+        for (int i = 0; i < indentationFor; i++) {
+            System.out.print(" ");
+        }
+        //Imprimir palabra while y un espacio
+        System.out.print("while ");
+
+        //La expresion condicional se imprime sola
+    }
+
+    @Override
+    public void enterSemicolonfor2(GramaticaCoralParser.Semicolonfor2Context ctx){
+        //Imprimir dos puntos y un salto de linea despues de expresion condicional
+        System.out.println(":");
+
+        //Imprimir la indentacion del for + 3 con un condicional para controlar ejecucion del for
+        for (int i = 0; i < indentationFor+3; i++) {
+            System.out.print(" ");
+        }
+        //Imprimir un condicional para controlar la primera ejecucion
+        //Imprime salto de linea tambien
+        System.out.println("if _booleanFor:");
+
+        //Imprimir la indentacion del for + 6 espacios
+        //Para indentacion de la expresion de asignacion de actualizacion
+        //Imprimir la indentacion del for + 3 con un condicional para controlar ejecucion del for
+        for (int i = 0; i < indentationFor+6; i++) {
+            System.out.print(" ");
+        }
+
+        //La expresion de asignacion se imprime sola
+    }
+
+    @Override
+    public void exitForsentence(GramaticaCoralParser.ForsentenceContext ctx){
+        //Imprimir indentacion del for + 3 para actualizar la variable booleana
+        for (int i = 0; i < indentationFor+3; i++) {
+            System.out.print(" ");
+        }
+
+        //Imprimir la actualizacion a la variable booleana
+        //Se imprime un salto de linea tambien
+        System.out.println("_booleanFor = True");
+
+        //Imprimir indentacion del for + 3 para una condicion
+        for (int i = 0; i < indentationFor+3; i++) {
+            System.out.print(" ");
+        }
+
+        //Imprimir inicio del condicional de control
+        System.out.print("if not(");
+
+        //Imprimir expresion condicional
+        System.out.print(ctx.condexpr().getText());
+
+        //Imprimir un parentesis de cerrado y dos puntos
+        //Imprimir salto de linea
+        System.out.println("):");
+
+        //Imprimir indentacion del for + 6 para una condicion
+        //De ruptura del ciclo en el momento que se incumpla la condicion
+        for (int i = 0; i < indentationFor+6; i++) {
+            System.out.print(" ");
+        }
+
+        //Imprimir sentencia break con salto de linea
+        System.out.println("break");
+    }
 
     @Override
     public void enterDeclaration(GramaticaCoralParser.DeclarationContext ctx) {
