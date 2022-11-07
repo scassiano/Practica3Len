@@ -1,5 +1,6 @@
 integer x
 if x>2
-  //Hoy quiero hacer otro if
-  if x>3
-     Put "Tamarindo seco" to output
+   //Hoy quiero hacer otro if
+   x=3
+elseif x>3
+   Put "Tamarindo seco" to output

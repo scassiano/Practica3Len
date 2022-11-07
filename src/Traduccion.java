@@ -59,9 +59,21 @@ public class Traduccion extends GramaticaCoralBaseListener {
     }
 
     @Override
+    public void enterElseif(GramaticaCoralParser.ElseifContext ctx){
+        //Imprimir para elif con un espacio
+        System.out.print("elif ");
+    }
+
+    @Override
+    public void exitElseif(GramaticaCoralParser.ElseifContext ctx){
+        //Imprimir un salto de linea
+        System.out.println();
+    }
+
+    @Override
     public void exitCondexpr(GramaticaCoralParser.CondexprContext ctx){
-        //Verificar si el padre es una regla if
-        if(ctx.getParent() instanceof GramaticaCoralParser.IfContext){
+        //Verificar si el padre es una regla if o una regla elseif
+        if(ctx.getParent() instanceof GramaticaCoralParser.IfContext || ctx.getParent() instanceof GramaticaCoralParser.ElseifContext){
             //Imprimir : al final de la sentencia y una nueva linea
             System.out.print(":");
         }

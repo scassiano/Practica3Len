@@ -7,10 +7,11 @@ init: commands EOF;
 commands: command commands| ;
 
 //Se pone directamente callfunction ya que en los test se aseguran entradas validas
-command :  newlinespaces (declaration|input|set|output|comment|seedrandomnumbers|callfunction|if);
+//Se pone directamente if, elseif, else ya que los test se aseguran entradas validas
+command :  newlinespaces (declaration|input|set|output|comment|seedrandomnumbers|callfunction|if|elseif);
 
 if : IF condexpr;
-//elseif : ELSEIF condexpr;
+elseif : ELSEIF condexpr;
 //else : ELSE;
 
 declaration : TYPE IDENTIFIER

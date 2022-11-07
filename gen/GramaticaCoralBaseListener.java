@@ -63,6 +63,18 @@ public class GramaticaCoralBaseListener implements GramaticaCoralListener {
 	 *
 	 * <p>The default implementation does nothing.</p>
 	 */
+	@Override public void enterElseif(GramaticaCoralParser.ElseifContext ctx) { }
+	/**
+	 * {@inheritDoc}
+	 *
+	 * <p>The default implementation does nothing.</p>
+	 */
+	@Override public void exitElseif(GramaticaCoralParser.ElseifContext ctx) { }
+	/**
+	 * {@inheritDoc}
+	 *
+	 * <p>The default implementation does nothing.</p>
+	 */
 	@Override public void enterDeclaration(GramaticaCoralParser.DeclarationContext ctx) { }
 	/**
 	 * {@inheritDoc}

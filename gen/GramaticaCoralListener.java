@@ -47,6 +47,16 @@ public interface GramaticaCoralListener extends ParseTreeListener {
 	 */
 	void exitIf(GramaticaCoralParser.IfContext ctx);
 	/**
+	 * Enter a parse tree produced by {@link GramaticaCoralParser#elseif}.
+	 * @param ctx the parse tree
+	 */
+	void enterElseif(GramaticaCoralParser.ElseifContext ctx);
+	/**
+	 * Exit a parse tree produced by {@link GramaticaCoralParser#elseif}.
+	 * @param ctx the parse tree
+	 */
+	void exitElseif(GramaticaCoralParser.ElseifContext ctx);
+	/**
 	 * Enter a parse tree produced by {@link GramaticaCoralParser#declaration}.
 	 * @param ctx the parse tree
 	 */
