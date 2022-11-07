@@ -36,6 +36,12 @@ public class Traduccion extends GramaticaCoralBaseListener {
     }
 
     @Override
+    public void exitCommand(GramaticaCoralParser.CommandContext ctx){
+        System.out.println("");
+
+    }
+
+    @Override
     public void enterNewlinespaces(GramaticaCoralParser.NewlinespacesContext ctx){
         //System.out.print(ctx.NEWLINESPACES().getText());
     }

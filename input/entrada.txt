@@ -1,3 +1,12 @@
-integer check
-   check=2
-   integer y
+integer x
+   //comentario
+   x=3
+   x=56/x
+      x=4
+      //comentario2
+      x=555
+      //conmentario3
+      //comentario4
+   //comentario 5
+float y
+//comentfinal
