@@ -13,12 +13,27 @@ public class Traduccion extends GramaticaCoralBaseListener {
     //Variable para conocer indentacion de un for
     Integer indentationFor = new Integer(0);
 
+    //Variable para saber que retorna una funcion que esta siendo definida
+    String returnVariable = new String("");
+
+    //Saber si se creo una funcion main y es necesario llamarla al final
+    Boolean mainExists = new Boolean(false);
+
 
     @Override
     public void enterInit(GramaticaCoralParser.InitContext ctx) {
         /** Agregar los imports para las funciones predeterminadas*/
         System.out.println("import math");
         System.out.println("import random");
+    }
+
+    @Override
+    public void exitInit(GramaticaCoralParser.InitContext ctx){
+        //Llamar al main si existe
+        if(mainExists){
+            System.out.println("");
+            System.out.print("Main()");
+        }
     }
 
     @Override
@@ -188,6 +203,69 @@ public class Traduccion extends GramaticaCoralBaseListener {
 
         //Imprimir sentencia break con salto de linea
         System.out.println("break");
+    }
+
+    @Override
+    public void enterFunctiondef(GramaticaCoralParser.FunctiondefContext ctx){
+        //Verificar si se definio antes una funcion y retornaba algo
+        //Para imprimir la sentencia de return de la anterior funcion
+        if( returnVariable.compareTo("") != 0){
+            //Entonces si toca hacer una sentencia de return de dicha variable
+            //Este return siempre tiene 3 espacios de indentacion
+            System.out.print("   ");
+            System.out.print("return ");
+            System.out.println(returnVariable);
+
+            //La return variable se vuelve a dejar como cadena vacia
+            returnVariable = "";
+        }
+
+        //Imprimir la palabra def y un espacio para python
+        System.out.print("def ");
+        // Imprimir el primer identificador
+        System.out.print(ctx.IDENTIFIER(0).getText());
+
+        //Reconocer si el identificador de la funcion es Main, para saber que
+        // hay que ejecutarla
+        if(ctx.IDENTIFIER(0).getText().compareTo("Main") == 0){
+            mainExists = true;
+        }
+
+        //Luego se imprime solo el parentesis izquierdo
+    }
+
+    @Override
+    public void exitFunctiondef(GramaticaCoralParser.FunctiondefContext ctx){
+        //Imprimir los dos puntos de python
+        System.out.println(":");
+        //Verificar si hace return diferente de nothing para almacenar lo que retorna
+        if(ctx.NOTHING() == null){
+            //Almacenar la variable de salida en la tabla de simbolos
+            table.put(ctx.IDENTIFIER(1).getText(), ctx.TYPE().getText());
+
+            //Indicar que esa sera la variable que se debe retornar de esta funcion
+            returnVariable = ctx.IDENTIFIER(1).getText();
+        }
+    }
+
+    @Override
+    public void enterParameters(GramaticaCoralParser.ParametersContext ctx){
+        //Imprimir identificadores solo si tiene IDENTIFIER, y almacenar su tipo
+        if(ctx.IDENTIFIER() != null){
+            System.out.print(ctx.IDENTIFIER().getText());
+            //Almacenar en la tabla segun tipo de dato del identificador
+            table.put(ctx.IDENTIFIER().getText(), ctx.TYPE().getText());
+        }
+    }
+
+    @Override
+    public void exitParametersprima(GramaticaCoralParser.ParametersprimaContext ctx){
+        //Imprimir identificadores solo si tiene IDENTIFIER, y almacenar su tipo
+        if(ctx.identifier() != null){
+            //El identificador se imprime solo en su momento
+            //Almacenar en la tabla segun tipo de dato del identificador
+            table.put(ctx.identifier().IDENTIFIER().getText(), ctx.TYPE().getText());
+        }
     }
 
     @Override
@@ -429,6 +507,11 @@ public class Traduccion extends GramaticaCoralBaseListener {
     @Override
     public void enterOprel(GramaticaCoralParser.OprelContext ctx){
         System.out.print(ctx.OPREL().getText());
+    }
+
+    @Override
+    public void enterIdentifier(GramaticaCoralParser.IdentifierContext ctx){
+        System.out.print(ctx.IDENTIFIER().getText());
     }
 
     @Override

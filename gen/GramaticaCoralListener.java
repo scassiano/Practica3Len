@@ -447,6 +447,16 @@ public interface GramaticaCoralListener extends ParseTreeListener {
 	 */
 	void exitSign(GramaticaCoralParser.SignContext ctx);
 	/**
+	 * Enter a parse tree produced by {@link GramaticaCoralParser#identifier}.
+	 * @param ctx the parse tree
+	 */
+	void enterIdentifier(GramaticaCoralParser.IdentifierContext ctx);
+	/**
+	 * Exit a parse tree produced by {@link GramaticaCoralParser#identifier}.
+	 * @param ctx the parse tree
+	 */
+	void exitIdentifier(GramaticaCoralParser.IdentifierContext ctx);
+	/**
 	 * Enter a parse tree produced by {@link GramaticaCoralParser#number}.
 	 * @param ctx the parse tree
 	 */

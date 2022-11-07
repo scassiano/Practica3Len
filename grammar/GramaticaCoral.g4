@@ -59,7 +59,7 @@ arguments : arithexpr argumentsprima | ;
 argumentsprima : coma arithexpr argumentsprima | ;
 
 parameters: TYPE IDENTIFIER parametersprima | ;
-parametersprima: coma TYPE IDENTIFIER parametersprima | ;
+parametersprima: coma TYPE identifier parametersprima | ;
 
 seedrandomnumbers : SEEDRANDOMNUMBERS PIZQ arithexpr PDER;
 
@@ -68,6 +68,7 @@ outvalue: arithexpr | STRING;
 size: QUESTIONMARK | INTNUM;
 
 newlinespaces:NEWLINESPACES| ;
+
 
 semicolonfor1: SEMICOLON;
 semicolonfor2: SEMICOLON;
@@ -86,7 +87,7 @@ pizq: PIZQ;
 pder: PDER;
 sign : SUMOP;
 
-
+identifier : IDENTIFIER;
 number : INTNUM
 | FLOATNUM
 ;

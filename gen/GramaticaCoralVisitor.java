@@ -274,6 +274,12 @@ public interface GramaticaCoralVisitor<T> extends ParseTreeVisitor<T> {
 	 */
 	T visitSign(GramaticaCoralParser.SignContext ctx);
 	/**
+	 * Visit a parse tree produced by {@link GramaticaCoralParser#identifier}.
+	 * @param ctx the parse tree
+	 * @return the visitor result
+	 */
+	T visitIdentifier(GramaticaCoralParser.IdentifierContext ctx);
+	/**
 	 * Visit a parse tree produced by {@link GramaticaCoralParser#number}.
 	 * @param ctx the parse tree
 	 * @return the visitor result
