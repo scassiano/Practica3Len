@@ -111,6 +111,18 @@ public class GramaticaCoralBaseListener implements GramaticaCoralListener {
 	 *
 	 * <p>The default implementation does nothing.</p>
 	 */
+	@Override public void enterFunctiondef(GramaticaCoralParser.FunctiondefContext ctx) { }
+	/**
+	 * {@inheritDoc}
+	 *
+	 * <p>The default implementation does nothing.</p>
+	 */
+	@Override public void exitFunctiondef(GramaticaCoralParser.FunctiondefContext ctx) { }
+	/**
+	 * {@inheritDoc}
+	 *
+	 * <p>The default implementation does nothing.</p>
+	 */
 	@Override public void enterDeclaration(GramaticaCoralParser.DeclarationContext ctx) { }
 	/**
 	 * {@inheritDoc}
@@ -262,6 +274,30 @@ public class GramaticaCoralBaseListener implements GramaticaCoralListener {
 	 * <p>The default implementation does nothing.</p>
 	 */
 	@Override public void exitArgumentsprima(GramaticaCoralParser.ArgumentsprimaContext ctx) { }
+	/**
+	 * {@inheritDoc}
+	 *
+	 * <p>The default implementation does nothing.</p>
+	 */
+	@Override public void enterParameters(GramaticaCoralParser.ParametersContext ctx) { }
+	/**
+	 * {@inheritDoc}
+	 *
+	 * <p>The default implementation does nothing.</p>
+	 */
+	@Override public void exitParameters(GramaticaCoralParser.ParametersContext ctx) { }
+	/**
+	 * {@inheritDoc}
+	 *
+	 * <p>The default implementation does nothing.</p>
+	 */
+	@Override public void enterParametersprima(GramaticaCoralParser.ParametersprimaContext ctx) { }
+	/**
+	 * {@inheritDoc}
+	 *
+	 * <p>The default implementation does nothing.</p>
+	 */
+	@Override public void exitParametersprima(GramaticaCoralParser.ParametersprimaContext ctx) { }
 	/**
 	 * {@inheritDoc}
 	 *

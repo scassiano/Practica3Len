@@ -87,6 +87,16 @@ public interface GramaticaCoralListener extends ParseTreeListener {
 	 */
 	void exitForsentence(GramaticaCoralParser.ForsentenceContext ctx);
 	/**
+	 * Enter a parse tree produced by {@link GramaticaCoralParser#functiondef}.
+	 * @param ctx the parse tree
+	 */
+	void enterFunctiondef(GramaticaCoralParser.FunctiondefContext ctx);
+	/**
+	 * Exit a parse tree produced by {@link GramaticaCoralParser#functiondef}.
+	 * @param ctx the parse tree
+	 */
+	void exitFunctiondef(GramaticaCoralParser.FunctiondefContext ctx);
+	/**
 	 * Enter a parse tree produced by {@link GramaticaCoralParser#declaration}.
 	 * @param ctx the parse tree
 	 */
@@ -216,6 +226,26 @@ public interface GramaticaCoralListener extends ParseTreeListener {
 	 * @param ctx the parse tree
 	 */
 	void exitArgumentsprima(GramaticaCoralParser.ArgumentsprimaContext ctx);
+	/**
+	 * Enter a parse tree produced by {@link GramaticaCoralParser#parameters}.
+	 * @param ctx the parse tree
+	 */
+	void enterParameters(GramaticaCoralParser.ParametersContext ctx);
+	/**
+	 * Exit a parse tree produced by {@link GramaticaCoralParser#parameters}.
+	 * @param ctx the parse tree
+	 */
+	void exitParameters(GramaticaCoralParser.ParametersContext ctx);
+	/**
+	 * Enter a parse tree produced by {@link GramaticaCoralParser#parametersprima}.
+	 * @param ctx the parse tree
+	 */
+	void enterParametersprima(GramaticaCoralParser.ParametersprimaContext ctx);
+	/**
+	 * Exit a parse tree produced by {@link GramaticaCoralParser#parametersprima}.
+	 * @param ctx the parse tree
+	 */
+	void exitParametersprima(GramaticaCoralParser.ParametersprimaContext ctx);
 	/**
 	 * Enter a parse tree produced by {@link GramaticaCoralParser#seedrandomnumbers}.
 	 * @param ctx the parse tree

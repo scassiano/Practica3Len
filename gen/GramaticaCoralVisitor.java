@@ -58,6 +58,12 @@ public interface GramaticaCoralVisitor<T> extends ParseTreeVisitor<T> {
 	 */
 	T visitForsentence(GramaticaCoralParser.ForsentenceContext ctx);
 	/**
+	 * Visit a parse tree produced by {@link GramaticaCoralParser#functiondef}.
+	 * @param ctx the parse tree
+	 * @return the visitor result
+	 */
+	T visitFunctiondef(GramaticaCoralParser.FunctiondefContext ctx);
+	/**
 	 * Visit a parse tree produced by {@link GramaticaCoralParser#declaration}.
 	 * @param ctx the parse tree
 	 * @return the visitor result
@@ -135,6 +141,18 @@ public interface GramaticaCoralVisitor<T> extends ParseTreeVisitor<T> {
 	 * @return the visitor result
 	 */
 	T visitArgumentsprima(GramaticaCoralParser.ArgumentsprimaContext ctx);
+	/**
+	 * Visit a parse tree produced by {@link GramaticaCoralParser#parameters}.
+	 * @param ctx the parse tree
+	 * @return the visitor result
+	 */
+	T visitParameters(GramaticaCoralParser.ParametersContext ctx);
+	/**
+	 * Visit a parse tree produced by {@link GramaticaCoralParser#parametersprima}.
+	 * @param ctx the parse tree
+	 * @return the visitor result
+	 */
+	T visitParametersprima(GramaticaCoralParser.ParametersprimaContext ctx);
 	/**
 	 * Visit a parse tree produced by {@link GramaticaCoralParser#seedrandomnumbers}.
 	 * @param ctx the parse tree
