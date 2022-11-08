@@ -8,4 +8,4 @@ Brian Chaparro Cetina
 
 # Práctica 3
 
-Traductor de *CORAL* a *Python*
+Traductor de *CORAL* a *Python 3* realizado con ANTLR.
