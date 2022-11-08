@@ -1,8 +1,13 @@
+import org.antlr.v4.runtime.tree.ParseTreeWalker;
+
 import java.util.HashMap;
 public class Traduccion extends GramaticaCoralBaseListener {
 
     //Tabla de simbolos para saber tipo de variables
     HashMap<String, String> table = new HashMap<>();
+
+    //Tabla para saber que variables son array
+    HashMap<String, Boolean> arrayTable = new HashMap<>();
 
     //Nombre variable que se esta asignando actualmente
     String currentVariable = new String();
@@ -189,7 +194,9 @@ public class Traduccion extends GramaticaCoralBaseListener {
         System.out.print("if not(");
 
         //Imprimir expresion condicional
-        System.out.print(ctx.condexpr().getText());
+        //Volviendo a llamar su regla con ayuda de un walker
+        ParseTreeWalker walker = new ParseTreeWalker();
+        walker.walk(new Traduccion(), ctx.condexpr());
 
         //Imprimir un parentesis de cerrado y dos puntos
         //Imprimir salto de linea
@@ -242,6 +249,12 @@ public class Traduccion extends GramaticaCoralBaseListener {
         if(ctx.NOTHING() == null){
             //Almacenar la variable de salida en la tabla de simbolos
             table.put(ctx.IDENTIFIER(1).getText(), ctx.TYPE().getText());
+            //Almacenar si la variable es un arreglo o no
+            if(ctx.ARRAY() != null){
+                arrayTable.put(ctx.IDENTIFIER(1).getText(), true);
+            } else {
+                arrayTable.put(ctx.IDENTIFIER(1).getText(), false);
+            }
 
             //Indicar que esa sera la variable que se debe retornar de esta funcion
             returnVariable = ctx.IDENTIFIER(1).getText();
@@ -255,6 +268,12 @@ public class Traduccion extends GramaticaCoralBaseListener {
             System.out.print(ctx.IDENTIFIER().getText());
             //Almacenar en la tabla segun tipo de dato del identificador
             table.put(ctx.IDENTIFIER().getText(), ctx.TYPE().getText());
+            //Almacenar si la variable es un arreglo o no
+            if(ctx.ARRAY() != null){
+                arrayTable.put(ctx.IDENTIFIER().getText(), true);
+            } else {
+                arrayTable.put(ctx.IDENTIFIER().getText(), false);
+            }
         }
     }
 
@@ -265,6 +284,12 @@ public class Traduccion extends GramaticaCoralBaseListener {
             //El identificador se imprime solo en su momento
             //Almacenar en la tabla segun tipo de dato del identificador
             table.put(ctx.identifier().IDENTIFIER().getText(), ctx.TYPE().getText());
+            //Almacenar si la variable es un arreglo o no
+            if(ctx.ARRAY() != null){
+                arrayTable.put(ctx.identifier().IDENTIFIER().getText(), true);
+            } else {
+                arrayTable.put(ctx.identifier().IDENTIFIER().getText(), false);
+            }
         }
     }
 
@@ -276,6 +301,12 @@ public class Traduccion extends GramaticaCoralBaseListener {
 
         //Almacenar en la tabla segun tipo de dato del identificador
         table.put(ctx.IDENTIFIER().getText(), ctx.TYPE().getText());
+        //Almacenar si la variable es un array o no
+        if(ctx.ARRAY() != null){
+            arrayTable.put(ctx.IDENTIFIER().getText(), true);
+        } else {
+            arrayTable.put(ctx.IDENTIFIER().getText(), false);
+        }
 
         if(ctx.ARRAY() != null){
             /** Declarar un array float o integer */
@@ -336,9 +367,17 @@ public class Traduccion extends GramaticaCoralBaseListener {
 
     @Override
     public void exitSet(GramaticaCoralParser.SetContext ctx) {
-        /** Imprimir un salto de linea*/
-        //Cerrar el parentesis del cast que se hace en la asignacion
-        System.out.println(")");
+        //Saber si la variable actual es un array
+        Boolean arrayVariable = arrayTable.get(ctx.variable().IDENTIFIER().getText());
+
+        //Si la variable NO es un array variable o estamos asignando un size, imprimir parentesis de cast
+        if( !(arrayVariable && (ctx.variable().RSIZE() == null)) ){
+            //Cerrar el parentesis del cast que se hace en la asignacion
+            System.out.println(")");
+        } else {
+            //Imprimir solo un espacio vacio
+            System.out.println();
+        }
     }
 
     @Override
@@ -347,8 +386,9 @@ public class Traduccion extends GramaticaCoralBaseListener {
         System.out.print("print(");
 
         //Si es imprimir con cifras decimales especificas
+        //Apoyandose en uso de una variable
         if(ctx.with() != null){
-            System.out.print("round(");
+            System.out.print("'{:.{_prec}f}'.format(");
         }
     }
 
@@ -358,6 +398,7 @@ public class Traduccion extends GramaticaCoralBaseListener {
         //Si es imprimir con cifras decimales especificas
         //Poner un parentesis extra
         if(ctx.with() != null){
+            //Cerrar dos parentesis
             System.out.println("), end='')");
         } else {
             System.out.println(", end='')");
@@ -366,8 +407,8 @@ public class Traduccion extends GramaticaCoralBaseListener {
 
     @Override
     public void enterWith(GramaticaCoralParser.WithContext ctx){
-        //Imprimir una coma para el metodo round en la traduccion a python
-        System.out.print(",");
+        //Imprimir caracteres necesarios para formatear la salida
+        System.out.print(", _prec=");
     }
 
     @Override
@@ -383,8 +424,13 @@ public class Traduccion extends GramaticaCoralBaseListener {
                 System.out.print(ctx.variable().IDENTIFIER().getText());
                 System.out.print(")");
             } else {
-                //Si es una variable o posicion de un arreglo
-                System.out.print(ctx.variable().getText());
+                //Si es un acceso a la posicion de un arreglo solo imprimir identificador
+                if (ctx.variable().cizq() != null){
+                    System.out.print(ctx.variable().IDENTIFIER().getText());
+                } else {
+                    //Si es una variable que es un solo identificador
+                    System.out.print(ctx.variable().getText());
+                }
             }
         }
     }
@@ -532,13 +578,22 @@ public class Traduccion extends GramaticaCoralBaseListener {
             }
             sizeAssign = false;
         } else {
-            //Realizar el cast del resultado al tipo de la variable donde se asigna
-            if (variableType.compareTo("integer") == 0) {
-                System.out.print("int");
-            } else if (variableType.compareTo("float") == 0) {
-                System.out.print("float");
+            //No es una asignacion de size, pero puede ser una asignacion de array
+            //Verificar si es asignacion de array completo o de una variable
+            //Obtener un bool que indica si la variable a asignar es un array
+            Boolean arrayVariable = arrayTable.get(currentVariable);
+
+            //Si no es variable array hay que castearlo al tipo de la variable
+            if(!arrayVariable){
+                //Realizar el cast del resultado al tipo de la variable donde se asigna
+                if (variableType.compareTo("integer") == 0) {
+                    System.out.print("int");
+                } else if (variableType.compareTo("float") == 0) {
+                    System.out.print("float");
+                }
+                System.out.print("(");
+
             }
-            System.out.print("(");
         }
 
     }

@@ -15,7 +15,7 @@ elseif: ELSEIF condexpr;
 else: ELSE;
 while: WHILE condexpr;
 forsentence: FOR setfor1 semicolonfor1 condexpr semicolonfor2 setfor2;
-functiondef: FUNCTION IDENTIFIER pizq parameters pder RETURNS (NOTHING | TYPE IDENTIFIER);
+functiondef: FUNCTION IDENTIFIER pizq parameters pder RETURNS (NOTHING | TYPE (ARRAY PIZQ size PDER | ) IDENTIFIER);
 
 declaration : TYPE IDENTIFIER
 | TYPE ARRAY PIZQ size PDER IDENTIFIER;
@@ -58,8 +58,8 @@ arguments : arithexpr argumentsprima | ;
 
 argumentsprima : coma arithexpr argumentsprima | ;
 
-parameters: TYPE IDENTIFIER parametersprima | ;
-parametersprima: coma TYPE identifier parametersprima | ;
+parameters: TYPE (ARRAY PIZQ size PDER | ) IDENTIFIER parametersprima | ;
+parametersprima: coma TYPE (ARRAY PIZQ size PDER | ) identifier parametersprima | ;
 
 seedrandomnumbers : SEEDRANDOMNUMBERS PIZQ arithexpr PDER;
 
@@ -117,7 +117,8 @@ ABSOLUTEVALUE : 'AbsoluteValue';
 RANDOMNUMBER : 'RandomNumber';
 COMA : ',';
 ARRAY : 'array';
-STRING: ["].*?["];
+STRING: '"' (ESC|~('\\'))*? ('"');
+fragment ESC: '\\"' | '\\\\' | '\\n' | '\\t';
 FLOATNUM : [0-9]+([.][0-9]+);
 INTNUM : [0-9]+;
 OPREL : ('==' | '<=' | '<' | '>=' | '>' | '!=');
